@@ -11,7 +11,7 @@ set :repo_url, "git@github.com:fujisawatk/yakitori-app.git"
 set :branch, 'master'
 
 # deploy先のディレクトリ。 
-set :deploy_to, "/var/www/rails/yakitori-app"
+set :deploy_to, "/var/www/yakitori-app"
 
 # シンボリックリンクをはるファイル。
 set :linked_files, fetch(:linked_files, []).push("config/master.key")
