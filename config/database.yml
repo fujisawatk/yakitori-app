@@ -14,7 +14,7 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
+  password: password
   socket: /tmp/mysql.sock
 
 development:
@@ -49,6 +49,8 @@ test:
 #
 production:
   <<: *default
-  database: yakitori-app_production
-  username: yakitori-app
-  password: <%= ENV['YAKITORI-APP_DATABASE_PASSWORD'] %>
+  database: <%= Rails.application.credentials.db[:database] %>
+  username: <%= Rails.application.credentials.db[:username] %>
+  password: <%= Rails.application.credentials.db[:password] %>
+  socket: /var/lib/mysql/mysql.sock
+  host: <%= Rails.application.credentials.db[:host] %>
