@@ -47,12 +47,21 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="field is-grouped">
+        <% if user_signed_in? %>
           <p class="control">
-            <%= link_to "ログイン", "", class: "button is-primary subtitle is-6" %>
+            <%= link_to "ログアウト", destroy_user_session_path, class: "button is-primary subtitle is-6", method: :delete %>
           </p>
           <p class="control">
-            <%= link_to "新規登録", "", class: "button is-primary subtitle is-6" %>
+            <%= link_to "マイページ", "", class: "button is-primary subtitle is-6" %>
           </p>
+        <% else %>
+          <p class="control">
+            <%= link_to "ログイン", new_user_session_path, class: "button is-primary subtitle is-6" %>
+          </p>
+          <p class="control">
+            <%= link_to "新規登録", new_user_registration_path, class: "button is-primary subtitle is-6" %>
+          </p>
+        <% end %>
         </div>
       </div>
     </div>
