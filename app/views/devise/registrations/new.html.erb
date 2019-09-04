@@ -27,6 +27,16 @@
       <div class="actions">
         <%= f.submit "Sign up", class: "sign-button" %>
       </div>
+
+      <%= link_to user_twitter_omniauth_authorize_path, method: :post, class: "button is-info is-rounded" do %>
+        <i class="fab fa-twitter"></i>
+        <span>twitterで登録</span>
+      <% end %>
+      <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "button is-rounded" do %>
+        <i class="fab fa-google"></i>
+        <span>googleで登録</span>
+      <% end %>
+      
     <% end %>
   </div>
 </div>

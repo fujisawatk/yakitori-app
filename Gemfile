@@ -35,8 +35,12 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-gem "bulma-rails", "~> 0.7.5"
+gem 'bulma-rails', '~> 0.7.5'
 gem 'devise'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-twitter'
+gem 'font-awesome-sass', '~> 5.4.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -48,6 +52,7 @@ group :development, :test do
   gem 'capistrano3-unicorn'
   gem 'ed25519'
   gem 'bcrypt_pbkdf'
+  gem 'pry-rails'
 end
 
 group :development do

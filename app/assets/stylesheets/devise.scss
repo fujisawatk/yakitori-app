@@ -6,7 +6,7 @@
   background: #F7F7F7;
   .sign-card{
     background: #fff;
-		width: 24rem;
+		width: 25rem;
     box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.11);
     .sign-title{
       background-color: darken($primary, 5%);
@@ -74,6 +74,12 @@
 			&:active {
 				transform: translateY(1px);
 			}
-		}
+    }
+    .button{
+      margin: 1rem 0.25rem 0 0; 
+      .login-link{
+        font-size: 0.8rem;
+      }
+    }
   }
 }
