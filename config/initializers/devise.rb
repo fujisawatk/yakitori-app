@@ -301,11 +301,11 @@ Devise.setup do |config|
     Rails.application.credentials.google_oauth2[:google_client_id],
     Rails.application.credentials.google_oauth2[:google_client_secret],
     scope: 'userinfo.email, userinfo.profile',
-    redirect_uri: "http://localhost:3000/users/auth/google_oauth2/callback"
+    redirect_uri: "#{Rails.application.credentials.production_url[:host_domain]}/users/auth/google_oauth2/callback"
 
   config.omniauth :twitter,
     Rails.application.credentials.twitter[:twitter_api_key],
     Rails.application.credentials.twitter[:twitter_api_secret], display: 'popup',
-    callback_url: "http://localhost:3000/users/omniauth_callbacks"
+    callback_url: "#{Rails.application.credentials.production_url[:host_domain]}/users/omniauth_callbacks"
  
 end
