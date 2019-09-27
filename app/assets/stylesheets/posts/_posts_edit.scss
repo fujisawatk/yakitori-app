@@ -1,0 +1,62 @@
+.editpost{
+  display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+  background: #F7F7F7;
+  .editpost-card{
+    background: #fff;
+		width: 40rem;
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.11);
+    .editpost-title{
+      background-color: darken($primary, 5%);
+      padding: 2rem;
+      color: #fff;
+			text-align: center;
+			font-size: 1.4rem;
+    }
+    .edit_post{
+      padding: 3rem 2.5rem 5rem;
+    }
+    #post_title,
+    #post_body{
+      display: block;
+      width: 100%;
+      font-size: 1rem;
+      margin-bottom: 1.75rem;
+      padding: 0.25rem 0;
+      border: none;
+      border-bottom: 1px solid $grey-lighter;
+
+			&:hover{
+				border-color: $grey;
+			}
+
+			&:active, &:focus{
+				border-color: $primary;
+			}
+    }
+    .edit-button{
+			cursor: pointer;
+			font-size: 1.2rem;
+			color: $primary;
+			border-radius: 4rem;
+			display: block;
+			width: 75%;
+			background: transparent;
+			border: 2px solid $primary;
+			padding: 0.9rem 0 1.1rem;
+      transition: color .5s, border-color .5s;
+      margin: 0 auto;
+
+			&:hover, &:focus{
+				color: darken($primary, 10%);
+				border-color: darken($primary, 10%);
+			}
+
+			&:active{
+				transform: translateY(1px);
+			}
+    }
+  }
+}
