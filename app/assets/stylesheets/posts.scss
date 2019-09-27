@@ -2,8 +2,24 @@
   border-bottom: 1px solid #ccc;
 } 
 
+.toppage{
+  display: flex;
+}
+
 #sidebar{
   border-right: 1px solid #ccc;
   width: 300px;
   height: 100vh;
+}
+
+.contents{
+  width: calc(100vw - 300px);
+  height: 100vh;
+  padding: 20px;
+}
+
+.post-card{
+  width: 15rem;
+  height: 18rem;
+  background: #ddd;
 }
