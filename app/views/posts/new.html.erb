@@ -1,0 +1,21 @@
+<div class="newpost">
+  <div class="newpost-card">
+    <h2 class="newpost-title">投稿する</h2>
+    <%= form_for @post do |f| %>
+      <div class="field"> 
+        <%= f.label :title %><br />
+        <%= f.text_field :title %>
+      </div>
+
+      <div class="field">
+        <%= f.label :body %>
+        <%= f.text_area :body %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "投稿する", class: "post-button" %>
+      </div>
+      
+    <% end %>
+  </div>
+</div>
