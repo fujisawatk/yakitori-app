@@ -2,6 +2,6 @@
   <%= render 'shared/sidebar'%>
 
   <div class="contents">
-    <%= render partial: 'shared/post', locals: { post: @post } %>
+    <%= render partial: 'shared/post', collection: @posts %>
   </div>
 </div>

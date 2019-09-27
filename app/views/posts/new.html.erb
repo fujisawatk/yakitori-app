@@ -1,0 +1,21 @@
+<div class="sign">
+  <div class="sign-card">
+    <h2 class="sign-title">投稿する</h2>
+    <%= form_for @post do |f| %>
+      <label class="field"> 
+        <%= f.label :title %><br />
+        <%= f.text_field :title %>
+      </label>
+
+      <div class="field">
+        <%= f.label :body %>
+        <%= f.text_area :body %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "投稿する", class: "sign-button" %>
+      </div>
+      
+    <% end %>
+  </div>
+</div>

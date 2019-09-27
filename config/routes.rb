@@ -3,5 +3,5 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
   root "posts#index"
-  resources :posts, only: [:index]
+  resources :posts, only: [:index, :new, :create]
 end
