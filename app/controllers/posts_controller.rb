@@ -13,12 +13,21 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to root_path
     else
-      render 'new'
+      render :new
     end
   end
 
   def edit
     @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   private
