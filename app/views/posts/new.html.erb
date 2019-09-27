@@ -1,11 +1,11 @@
-<div class="sign">
-  <div class="sign-card">
-    <h2 class="sign-title">投稿する</h2>
+<div class="newpost">
+  <div class="newpost-card">
+    <h2 class="newpost-title">投稿する</h2>
     <%= form_for @post do |f| %>
-      <label class="field"> 
+      <div class="field"> 
         <%= f.label :title %><br />
         <%= f.text_field :title %>
-      </label>
+      </div>
 
       <div class="field">
         <%= f.label :body %>
@@ -13,7 +13,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "投稿する", class: "sign-button" %>
+        <%= f.submit "投稿する", class: "post-button" %>
       </div>
       
     <% end %>
