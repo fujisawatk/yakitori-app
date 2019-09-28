@@ -8,6 +8,11 @@
       <button class="delete" id="modal-del" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
+      <% if post.img.present? %>
+          <%= image_tag post.img.url %>
+        <% else %>
+          <%= image_tag "https://bulma.io/images/placeholders/1280x960.png" %>
+        <% end %>
       <%= simple_format(post.body) %>
     </section>
     <footer class="modal-card-foot">
