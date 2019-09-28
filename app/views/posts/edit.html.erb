@@ -3,6 +3,12 @@
     <h2 class="editpost-title">編集する</h2>
     <%= form_for @post do |f| %>
       <div class="field"> 
+        <%= f.label :img %><br />
+        <%= f.file_field :img, id: "post_img" %>
+        <p><%= f.check_box :remove_img %>画像を削除する</p>
+      </div>
+
+      <div class="field"> 
         <%= f.label :title %><br />
         <%= f.text_field :title %>
       </div>
