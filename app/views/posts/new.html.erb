@@ -4,7 +4,8 @@
     <%= form_for @post do |f| %>
       <div class="field"> 
         <%= f.label :img %><br />
-        <%= f.file_field :img, id: "post_img" %>
+        <%= image_tag "https://bulma.io/images/placeholders/1280x960.png", id: "img_prev", onClick: "$('#post_img').click()" %>
+        <%= f.file_field :img, id: "post_img", style:"display:none;" %>
       </div>
 
       <div class="field"> 
