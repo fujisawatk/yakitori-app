@@ -11,8 +11,8 @@
       <%= simple_format(post.body) %>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success">編集</button>
-      <button class="button">削除</button>
+      <%= button_to "編集", edit_post_path(post.id), class: "button is-success", method: :get %>
+      <%= button_to "削除", post_path(post.id), class: "button", method: :delete, data: {confirm: "削除しますか？"}  %>
     </footer>
   </div>
 </div>
