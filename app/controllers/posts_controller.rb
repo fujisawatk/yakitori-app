@@ -8,6 +8,14 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def show
+    @post = Post.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def create
     @post = Post.new(post_params)
     if @post.save
