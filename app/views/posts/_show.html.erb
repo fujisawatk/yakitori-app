@@ -1,0 +1,18 @@
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">
+       <%= post.title %>
+      </p>
+      <button class="delete" id="modal-del" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <%= simple_format(post.body) %>
+    </section>
+    <footer class="modal-card-foot">
+      <%= button_to "編集", edit_post_path(post.id), class: "button is-success", method: :get %>
+      <%= button_to "削除", post_path(post.id), class: "button", method: :delete, data: {confirm: "削除しますか？"}  %>
+    </footer>
+  </div>
+</div>

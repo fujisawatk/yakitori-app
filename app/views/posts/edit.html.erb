@@ -1,0 +1,21 @@
+<div class="editpost">
+  <div class="editpost-card">
+    <h2 class="editpost-title">編集する</h2>
+    <%= form_for @post do |f| %>
+      <div class="field"> 
+        <%= f.label :title %><br />
+        <%= f.text_field :title %>
+      </div>
+
+      <div class="field">
+        <%= f.label :body %>
+        <%= f.text_area :body %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "変更する", class: "edit-button" %>
+      </div>
+      
+    <% end %>
+  </div>
+</div>

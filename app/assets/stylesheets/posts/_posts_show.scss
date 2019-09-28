@@ -1,0 +1,25 @@
+.modal{
+  display: block;
+  .modal-background{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: black;
+    opacity: .7;
+  }
+  .modal-card{
+    position: absolute;
+    background-color: #fff;
+    width: 30rem;
+    height: 35rem;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: 100px auto 0;
+    border: 1px solid #eee;
+    text-align: center;
+  }
+}
