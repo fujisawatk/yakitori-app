@@ -21,7 +21,7 @@
             <%= link_to "ログアウト", destroy_user_session_path, class: "button is-primary subtitle is-6", method: :delete %>
           </p>
           <p class="control">
-            <%= link_to "マイページ", "", class: "button is-primary subtitle is-6" %>
+            <%= link_to "マイページ", mylist_user_path(current_user.id), class: "button is-primary subtitle is-6" %>
           </p>
         <% else %>
           <p class="control">
