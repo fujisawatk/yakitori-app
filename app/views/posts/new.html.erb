@@ -3,6 +3,11 @@
     <h2 class="newpost-title">投稿する</h2>
     <%= form_for @post do |f| %>
       <div class="field"> 
+        <%= f.label :img %><br />
+        <%= f.file_field :img, id: "post_img" %>
+      </div>
+
+      <div class="field"> 
         <%= f.label :title %><br />
         <%= f.text_field :title %>
       </div>
