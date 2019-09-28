@@ -8,11 +8,11 @@
       <button class="delete" id="modal-del" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
-      <%= post.body %>
+      <%= simple_format(post.body) %>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success">Save changes</button>
-      <button class="button">Cancel</button>
+      <button class="button is-success">編集</button>
+      <button class="button">削除</button>
     </footer>
   </div>
 </div>
