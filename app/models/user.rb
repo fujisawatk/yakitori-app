@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[google_oauth2 twitter]
 
+  has_many :posts
+  
   def self.from_omniauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
