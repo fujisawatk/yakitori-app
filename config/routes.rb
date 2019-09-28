@@ -4,4 +4,10 @@ Rails.application.routes.draw do
   }
   root "posts#index"
   resources :posts
+
+  resources :users, only: :show do
+    member do
+      get :mylist
+    end
+  end
 end
