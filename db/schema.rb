@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_28_064210) do
+ActiveRecord::Schema.define(version: 2019_09_29_012950) do
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2019_09_28_064210) do
     t.datetime "updated_at", null: false
     t.string "img"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "restaurants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "url", null: false
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_restaurants_on_post_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -38,4 +47,5 @@ ActiveRecord::Schema.define(version: 2019_09_28_064210) do
   end
 
   add_foreign_key "posts", "users"
+  add_foreign_key "restaurants", "posts"
 end
