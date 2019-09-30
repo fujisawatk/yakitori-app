@@ -1,2 +1,0 @@
-class PostsCategory < ApplicationRecord
-end
