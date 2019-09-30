@@ -13,10 +13,8 @@ $(function(){
     });
   }
   $(document).on("click", "#search", function(){
-    if(counts.length != 0){
     counts.length = 0;
     $("#ul").empty();
-    };
     params.name = $("#key").val();
     $.getJSON(url, params, function(result){
       showResult(result);
