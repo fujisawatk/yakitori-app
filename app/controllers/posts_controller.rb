@@ -51,7 +51,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :img, :img_cache, :remove_img, 
+    params.require(:post).permit(:title, :body, :img, :img_cache, :remove_img, category_ids: [],
                                 restaurant_attributes: [:id, :name, :url]).merge(user_id: current_user.id)
   end
 
