@@ -18,6 +18,16 @@
         <%= f.text_area :body %>
       </div>
 
+      <div class="field">
+        <%= f.label :category %>
+        <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
+          <%= category.label do %>
+            <%= category.check_box %>
+            <%= category.text %>
+          <% end %>
+        <% end %>
+      </div>
+
       <%= f.fields_for :restaurant, @post.restaurant || Restaurant.new do |p|%>  
         <div class="field">
           <input type="text" id="key" placeholder="キーワードを入力してください">
