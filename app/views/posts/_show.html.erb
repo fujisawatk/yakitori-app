@@ -1,25 +1,51 @@
 <div class="modal">
-  <div class="modal-background"></div>
+  <div class="modal-background">
+    <button class="delete is-large" id="modal-del" aria-label="close"></button>
+  </div>
+
   <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">
-       <%= post.title %>
-      </p>
-      <button class="delete" id="modal-del" aria-label="close"></button>
+    <header class="card-header" id="modal-header">
+      <h5 class="subtitle is-5">
+        <%= link_to "#{post.user.nickname}", mylist_user_path(:user),id: "modal-user" %>
+      </h5>
+      <%= link_to edit_post_path(post.id), method: :get do %>
+        <span class="icon" id="modal-icon">
+          <i class="far fa-edit"></i>
+        </span>
+      <% end %>
+      <%= link_to post_path(post.id), method: :delete, data: {confirm: "削除しますか？"} do %>
+        <span class="icon" id="modal-icon">
+          <i class="fas fa-trash"></i>
+        </span>
+      <% end %>
     </header>
     <section class="modal-card-body">
+      <h3 class="modal-card-title subtitle is-3" id="modal-line">
+        <%= post.title %>
+      </h3>
+  
       <% if post.img.present? %>
-          <%= image_tag post.img.url %>
-        <% else %>
-          <%= image_tag "https://bulma.io/images/placeholders/1280x960.png" %>
+        <%= image_tag post.img.url, id: "modal-line" %>
+      <% else %>
+        <%= image_tag "https://bulma.io/images/placeholders/1280x960.png",  id: "modal-body" %>
+      <% end %>
+      <div class='field' id="modal-line">
+        <p><%= simple_format(post.body) %></p>
+      </div>
+
+      <div class='field' id="modal-line">
+        <h6 class="title is-6">【オススメの焼き鳥】</h6>
+        <% @post.categories.each do |category| %>
+          <p><%= category.name %></p>
         <% end %>
-      <%= simple_format(post.body) %>
-      <%= post.restaurant.name %>
-      <%= button_to "詳細", "#{post.restaurant.url}", class: "button"%>
+      </div>
+      <div class='field' id="modal-line">
+        <h6 class="title is-6">【店舗情報】</h6>
+        <p><%= post.restaurant.name %></p> 
+
+      <%= button_to "店舗詳細", "#{post.restaurant.url}", class: "button"%>
     </section>
-    <footer class="modal-card-foot">
-      <%= button_to "編集", edit_post_path(post.id), class: "button is-success", method: :get %>
-      <%= button_to "削除", post_path(post.id), class: "button", method: :delete, data: {confirm: "削除しますか？"}  %>
-    </footer>
+    <%# <footer class="modal-card-foot">
+    </footer> %>
   </div>
 </div>
