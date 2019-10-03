@@ -1,10 +1,12 @@
 <%= render 'shared/header' %>
 
-<div class="toppage">
-  <%= render 'shared/sidebar'%>
+<%= render 'shared/sidebar' %>
+
+<%= render 'shared/upperbar' %>
 
   <div class="contents">
     <div id="modal-section"></div>
     <%= render partial: 'shared/post', collection: @posts %>
   </div>
-</div>
+
+<%= render 'shared/footer' %>
