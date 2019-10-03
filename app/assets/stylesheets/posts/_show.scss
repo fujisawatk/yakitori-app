@@ -4,8 +4,6 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    // top: 0;
-    // left: 0;
     background-color: black;
     opacity: 0.7;
     #modal-del{
@@ -20,7 +18,7 @@
     position: absolute;
     background-color: #fff;
     width: 60rem;
-    height: 100vh;
+    height: 100%;
     top: 0;
     left: 0;
     bottom: 0;
@@ -29,10 +27,10 @@
     text-align: center;
     #modal-header{
       background-color: black;
-      opacity: 0.7;
       padding-top: 1.25rem;
       #modal-user{
         color: #fff;
+        margin-left: 10px;
         &:hover {
           opacity: 0.7;
           cursor: pointer;
@@ -52,5 +50,21 @@
       margin: 20px 60px 0;
       padding-bottom: 20px;
     } 
+    .modal-comment{
+      padding: 0 4rem;
+      margin-top: 100px;
+      #comment-button{
+        font-weight: bold;
+        font-size: 0.75rem;
+        margin-top: 0.5rem;
+        float: right;
+      }
+      .comment-index{
+        padding: 20px 0;
+        text-align: left;
+
+
+      }
+    }
   }
 }
