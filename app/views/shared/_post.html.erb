@@ -1,20 +1,18 @@
 <%= link_to post_path(post), remote: true do %>
-  <div id="post-card">
-    <div class="card-image">
-      <figure class="image is-4by3">
-        <% if post.img.present? %>
-          <%= image_tag post.img.url %>
-        <% else %>
-          <%= image_tag "https://bulma.io/images/placeholders/1280x960.png" %>
-        <% end %>
-      </figure>
-    </div>
-    <div class="card-content">
-      <p class="title is-5">
-        <%= post.title.truncate(10) %>
-      </p>
-      <div class="content">
-        <%= post.body.truncate(13) %>
+  <div class="post-card">
+    <div class="post-image">
+      <% if post.img.present? %>
+        <%= image_tag post.img.url %>
+      <% else %>
+        <%= image_tag "https://bulma.io/images/placeholders/1280x960.png" %>
+      <% end %>
+      <div class="post-content">
+        <h2 class="post-title">
+          <%= post.title.truncate(10) %>
+        </h2>
+        <div class="post-user">
+          <%= post.user.nickname %>
+        </div>
       </div>
     </div>
   </div>

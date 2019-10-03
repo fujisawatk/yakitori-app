@@ -1,9 +1,14 @@
 @import "bulma";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
-@import "posts";
+@import "posts/index";
 @import "posts/new";
 @import "posts/show";
 @import "posts/edit";
 @import "devise";
 @import "users/mylist";
+@import "shared/header";
+@import "shared/footer";
+@import "shared/upperbar";
+@import "shared/sidebar";
+@import "shared/post";

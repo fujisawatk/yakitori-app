@@ -1,0 +1,28 @@
+#header-logo{
+  color: #fff;
+} 
+
+#header-span{
+  color: #ccc;
+  line-height: 1.75rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+#header-button{
+  font-weight: bold;
+  font-size: 0.75rem;
+  margin-right: 0.5rem;
+}
+
+#header-icon{
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+}
+
+#header-link{
+  color: #ccc;
+  &:hover{
+    opacity: 0.7;
+  }
+}

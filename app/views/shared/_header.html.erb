@@ -1,6 +1,8 @@
-<nav class="navbar is-transparent" id="header">
+<nav class="navbar is-black">
   <div class="navbar-brand">
-    <%= link_to "~鳥コミュ~", root_path, class:"navbar-item title" %>
+    <%= link_to root_path, class:"navbar-item" do %>
+      <h4 class="title is-4" id="header-logo">~とりコミュ~</h4>
+    <% end %>
     <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
       <span></span>
       <span></span>
@@ -10,7 +12,24 @@
 
   <div id="navbarExampleTransparentExample" class="navbar-menu">
     <div class="navbar-start">
-      <%= link_to "投稿する", new_post_path, class: "navbar-item"%>
+      <% if user_signed_in? %>
+        <div class="navbar-item">
+          <%= link_to "投稿する", new_post_path, class: "button is-warning", id: "header-button"%>
+        </div>
+      <% else %>
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <%= link_to "メールで新規登録", new_user_registration_path, class: "button is-warning", id: "header-button" %>
+            <span id="header-span">または</span>
+            <%= link_to user_twitter_omniauth_authorize_path, method: :post, class: "button is-info", id: "header-icon" do %>
+              <i class="fab fa-twitter"></i>
+            <% end %>
+            <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "button", id: "header-icon" do %>
+              <i class="fab fa-google"></i>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
 
     <div class="navbar-end">
@@ -18,18 +37,13 @@
         <div class="field is-grouped">
         <% if user_signed_in? %>
           <p class="control">
-            <%= link_to "ログアウト", destroy_user_session_path, class: "button is-primary subtitle is-6", method: :delete %>
+            <%= link_to "ログアウト", destroy_user_session_path, class: "title is-6", id: "header-link", method: :delete %>
           </p>
           <p class="control">
-            <%= link_to "マイページ", mylist_user_path(current_user.id), class: "button is-primary subtitle is-6" %>
+            <%= link_to "マイページ", mylist_user_path(current_user.id), class: "title is-6", id: "header-link" %>
           </p>
         <% else %>
-          <p class="control">
-            <%= link_to "ログイン", new_user_session_path, class: "button is-primary subtitle is-6" %>
-          </p>
-          <p class="control">
-            <%= link_to "新規登録", new_user_registration_path, class: "button is-primary subtitle is-6" %>
-          </p>
+          <%= link_to "ログイン", new_user_session_path, class: "title is-6", id: "header-link" %>
         <% end %>
         </div>
       </div>

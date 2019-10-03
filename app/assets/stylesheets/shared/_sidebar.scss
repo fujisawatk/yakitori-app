@@ -1,0 +1,22 @@
+#sidebar {
+  position: fixed;
+  top: 0;
+  width: 380px;
+  height: 35rem;
+  padding: 0 10px 0 0;
+  background: $warning;
+  z-index: 10;
+  display: flex;
+  margin-top: 60px;
+  overflow: scroll;
+  #menu{
+    display: none;
+  }
+  .hover{
+    writing-mode: vertical-rl;
+    text-align: center;
+    padding-top: 1rem;
+    font-size: 1.5rem;
+    letter-spacing: 1rem;
+  }
+}
