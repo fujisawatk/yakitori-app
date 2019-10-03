@@ -1,13 +1,15 @@
 <div class="column" id="sidebar">
-  <aside class="menu">
+  <aside class="menu" id="menu">
     <p class="menu-label">
       部位一覧
     </p>
-    <ul class="menu-list">
-      <li><a>もも肉</a></li>
-      <li><a>むね肉</a></li>
-      <li><a>かわ</a></li>
-      <li><a>ハツ</a></li>
+    <ul class="menu-list" id="sidebar-list">
+      <% @categories.each do |category| %>
+        <li>
+          <%= link_to "#{category.name}", "", class: "sidebar-parts"%>
+        </li>
+      <% end %>
     </ul>
   </aside>
+  <p class="hover">部位一覧</p>
 </div>
