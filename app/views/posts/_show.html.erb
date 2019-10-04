@@ -39,13 +39,37 @@
           <p><%= category.name %></p>
         <% end %>
       </div>
+
       <div class='field' id="modal-line">
         <h6 class="title is-6">【店舗情報】</h6>
         <p><%= post.restaurant.name %></p> 
+        <%= button_to "店舗詳細", "#{post.restaurant.url}", class: "button"%>
+      </div>
 
-      <%= button_to "店舗詳細", "#{post.restaurant.url}", class: "button"%>
+      <div class="modal-comment">
+        <%= form_for [@post, @comment] do |f| %>
+          <div class="field">
+            <div class="control">
+              <textarea class= "textarea" id="dummy-area" placeholder="コメントを入力してください"></textarea>
+              <div class="comment-error"></div>
+              <div class="button is-warning" id="dummy-button">コメントする</div>
+              <%= f.text_area :comment, id: "comment-area" %>
+              <%= f.submit class: "button is-warning", id: "comment-button" %>
+            </div>
+          </div>
+        <% end %>
+        <div class="comment-index">
+          <h6 class="title is-6">【コメント一覧】</h6>
+            <% if @comments %>
+              <% @comments.each do |comment| %>
+                <p>
+                  <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>：</strong>
+                  <%= comment.comment %>
+                </p>
+              <% end %>
+            <% end %>
+        </div>
+      </div>
     </section>
-    <%# <footer class="modal-card-foot">
-    </footer> %>
   </div>
 </div>

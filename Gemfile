@@ -44,6 +44,7 @@ gem 'font-awesome-sass', '~> 5.4.1'
 gem 'jquery-rails'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'gon'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
