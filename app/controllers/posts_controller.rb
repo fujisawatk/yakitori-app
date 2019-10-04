@@ -3,6 +3,10 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @categories = Category.all
+    if user_signed_in?
+    gon.current_user_id = current_user.id
+    gon.current_user_name = current_user.nickname
+    end
   end
 
   def new

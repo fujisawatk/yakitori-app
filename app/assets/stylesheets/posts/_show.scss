@@ -53,11 +53,19 @@
     .modal-comment{
       padding: 0 4rem;
       margin-top: 100px;
-      #comment-button{
+      .comment-error{
+        color: red;
+        display: inline-block;
+      }
+      #dummy-button{
         font-weight: bold;
         font-size: 0.75rem;
         margin-top: 0.5rem;
         float: right;
+      }
+      #comment-button,
+      #comment-area{
+        visibility : hidden;
       }
       .comment-index{
         padding: 20px 0;
