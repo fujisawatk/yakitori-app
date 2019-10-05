@@ -1,14 +1,14 @@
 <div class="sign">
   <div class="sign-card">
-    <h2 class="sign-title">Sign in</h2>
+    <h2 class="sign-title">ユーザーログイン</h2>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.label :email, class: "label" %>
+        <%= f.email_field :email, autocomplete: "email" %>
       </div>
 
       <div class="field">
-        <%= f.label :password %><br />
+        <%= f.label :password, class: "label" %>
         <%= f.password_field :password, autocomplete: "current-password" %>
       </div>
 
@@ -21,7 +21,7 @@
       <% end %>
 
       <div class="actions">
-        <%= f.submit "Log in", class: "sign-button" %>
+        <%= f.submit "ログイン", class: "sign-button" %>
       </div>
 
       <%= link_to user_twitter_omniauth_authorize_path, method: :post, class: "button is-info is-rounded" do %>
