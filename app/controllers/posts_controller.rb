@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all
+    @posts = Post.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
     @categories = Category.all
     if user_signed_in?
     gon.current_user_id = current_user.id
