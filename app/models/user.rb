@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+
+  validates :nickname, presence: true, length: { maximum: 50 }
   
   def self.from_omniauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
