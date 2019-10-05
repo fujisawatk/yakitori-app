@@ -1,37 +1,57 @@
+<%= render 'shared/logo' %>
+
 <div class="newpost">
   <div class="newpost-card">
     <h2 class="newpost-title">投稿する</h2>
     <%= form_for @post do |f| %>
-      <div class="field"> 
-        <%= f.label :img %><br />
-        <%= image_tag "https://bulma.io/images/placeholders/1280x960.png", id: "img_prev", onClick: "$('#post_img').click()" %>
+      <div class="field" id="img-field"> 
+        <%= f.label :img, class: "label" %>
+        <%= image_tag "https://bulma.io/images/placeholders/1280x960.png", id: "img_prev", size: '60*60', onClick: "$('#post_img').click()" %>
         <%= f.file_field :img, id: "post_img", style:"display:none;" %>
+        <p class="error">
+          <%= @post.errors.full_messages_for(:img)[0] if @post.errors.any? %>
+        </p>
       </div>
 
-      <div class="field"> 
-        <%= f.label :title %><br />
+      <div class="field" id="title-field"> 
+        <%= f.label :title, class: "label" %>
         <%= f.text_field :title %>
+        <p class="error">
+          <%= @post.errors.full_messages_for(:title)[0] if @post.errors.any? %>
+        </p>
       </div>
 
-      <div class="field">
-        <%= f.label :body %>
+      <div class="field" id="body-field">
+        <%= f.label :body, class: "label" %>
         <%= f.text_area :body %>
+        <p class="error">
+          <%= @post.errors.full_messages_for(:body)[0] if @post.errors.any? %>
+        </p>
       </div>
 
-      <div class="field">
-        <%= f.label :category %>
-        <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
-          <%= category.label do %>
-            <%= category.check_box %>
-            <%= category.text %>
+      <div class="field" id="category-field">
+        <%= f.label "おすすめの焼き鳥", class: "label" %>
+        <div class="category-index">
+          <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
+            <%= category.label class: "category-parts" do %>
+              <%= category.check_box %>
+              <p class="parts"><%= category.text %></p>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
+        <p class="error">
+          <%= @post.errors.full_messages_for(:category_ids)[0] if @post.errors.any? %>
+        </p>
       </div>
 
       <%= f.fields_for :restaurant, @post.restaurant || Restaurant.new do |p|%>  
-        <div class="field">
-          <input type="text" id="key" placeholder="キーワードを入力してください">
-          <input type="button" id="search" value="検索">
+        <div class="field" id="restaurant-field">
+          <%= f.label "店舗", class: "label" %>
+          <input class="input" type="text" id="key" placeholder="キーワードを入力してください">
+          <input class="button is-warning" type="button" id="search" value="検索">
+          <p class="error">
+            <%= @post.errors.full_messages_for(:"restaurant.name")[0] if @post.errors.any? %>
+          </p>
           <ul id="ul"></ul>
             <%= p.hidden_field :name, id: "rest_name" %>
             <%= p.hidden_field :url , id: "rest_url" %>
@@ -42,7 +62,6 @@
         <%= f.submit "投稿する", class: "post-button" %>
       </div>
 
-      
     <% end %>
   </div>
 </div>
