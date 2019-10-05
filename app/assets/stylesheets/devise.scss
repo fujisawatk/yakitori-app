@@ -6,7 +6,8 @@
   background: #F7F7F7;
   .sign-card{
     background: #fff;
-		width: 25rem;
+    width: 25rem;
+    height: 45rem;
     box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.11);
     .sign-title{
       background-color: darken($primary, 5%);
@@ -18,13 +19,17 @@
     .new_user{
       padding: 3rem 2.5rem 5rem;
     }
+    .field{
+      margin-bottom: 0;
+      height: 5rem;
+    }
+    #user_nickname,
     #user_email,
     #user_password,
     #user_password_confirmation{
       display: block;
       width: 100%;
       font-size: 1rem;
-      margin-bottom: 1.75rem;
       padding: 0.25rem 0;
       border: none;
       border-bottom: 1px solid $grey-lighter;
@@ -36,6 +41,10 @@
 			&:active, &:focus {
 				border-color: $primary;
 			}
+    }
+    .error{
+      color: red;
+      font-size: 0.75rem;
     }
     .sign-link{
       display: block;
