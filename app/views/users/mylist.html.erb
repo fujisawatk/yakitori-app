@@ -1,6 +1,10 @@
 <%= render 'shared/header' %>
 
+<%= render 'users/upperbar' %>
+
 <div class="mylist">
   <div id="modal-section"></div>
   <%= render partial: 'shared/post', collection: @posts %>
 </div>
+
+<%= paginate @posts %>
