@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    models:
+      post: 
+      restaurant:
+    attributes:
+      post:
+        title: タイトル
+        body: 本文
+        img: 画像
+        category_ids: 種類
+      restaurant:
+        name: 店舗
+       
