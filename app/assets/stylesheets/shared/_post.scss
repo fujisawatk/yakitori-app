@@ -6,7 +6,10 @@
   background: #ccc;
   box-shadow: 3px 3px 10px rgba(0,0,0,0.6);
   .post-image{
-    border-radius: 10px;
+    img{
+      height: 13.25rem;
+      width: 20rem;
+    }
     .post-content{
       position: absolute;
       bottom: 0;
