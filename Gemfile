@@ -47,6 +47,7 @@ gem 'mini_magick'
 gem 'gon'
 gem 'rails-i18n', '~> 5.1'
 gem 'kaminari'
+gem 'fog-aws'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -62,7 +63,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'fog-aws'
 end
 
 group :development do
