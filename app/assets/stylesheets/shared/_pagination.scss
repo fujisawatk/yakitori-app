@@ -1,0 +1,31 @@
+#pagination{
+  padding: 0 40px 20px;
+  background: #f9f9f9;
+  display: flex;
+  ul.pagination-list{
+    .page-left,
+    .page-right{
+      display: flex;
+    }
+    li{
+      #current{
+        background: #fff;
+        color: black;
+      }
+      .pagination-link,
+      .pagination-previous,
+      .pagination-next{
+        background: $warning;
+        border-color: #dbdbdb; 
+        a{
+        text-decoration: none;
+        color: black;
+        }
+        &:hover {
+          border-color: $grey;
+          background-color: darken($warning, 20%);
+        }
+      }
+    }
+  }
+}

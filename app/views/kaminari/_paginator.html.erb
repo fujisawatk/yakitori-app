@@ -1,0 +1,25 @@
+<%= paginator.render do -%>
+  <nav class="pagination is-centered" id="pagination" role="navigation" aria-label="pagination">
+    <ul class="pagination-list">
+      <li>
+        <ul class=page-left>
+          <li><%= first_page_tag unless current_page.first? %></li>
+          <li><%= prev_page_tag unless current_page.first? %></li>
+        </ul>
+      </li>
+      <% each_page do |page| -%>
+        <% if page.display_tag? -%>
+          <li><%= page_tag page %></li>
+        <% elsif !page.was_truncated? -%>
+          <%= gap_tag %>
+        <% end -%>
+      <% end -%>
+      <li>
+        <ul class=page-right>
+          <% unless current_page.out_of_range? %>
+            <li><%= next_page_tag unless current_page.last? %></li>
+            <li><%= last_page_tag unless current_page.last? %></li>
+          <% end %>
+    </ul>
+  </nav>
+<% end -%>

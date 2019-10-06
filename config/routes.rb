@@ -12,4 +12,7 @@ Rails.application.routes.draw do
       get :mylist
     end
   end
+
+  resources :categories, only: :show
+
 end
