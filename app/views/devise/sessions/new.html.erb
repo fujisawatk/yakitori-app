@@ -26,13 +26,21 @@
 
       <%= link_to user_twitter_omniauth_authorize_path, method: :post, class: "button is-info is-rounded" do %>
         <i class="fab fa-twitter"></i>
-        <span class="login-link">twitterでログイン</span>
+        <span class="login-link">でログイン</span>
       <% end %>
       <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "button is-rounded" do %>
         <i class="fab fa-google"></i>
-        <span class="login-link">googleでログイン</span>
+        <span class="login-link">でログイン</span>
       <% end %>
-
     <% end %>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="actions">
+        <%= f.submit "テストユーザーログイン", class: "sign-button" %>
+        <%= f.hidden_field :email, {value: 'test@example.com'} %>
+        <%= f.hidden_field :password , {value: '11111111'} %>
+      </div>
+    <% end %>
+            
   </div>
 </div>
