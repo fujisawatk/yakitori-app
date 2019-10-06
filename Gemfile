@@ -47,7 +47,6 @@ gem 'mini_magick'
 gem 'gon'
 gem 'rails-i18n', '~> 5.1'
 gem 'kaminari'
-gem 'fog-aws'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -80,5 +79,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production, :staging do
   gem 'unicorn'
+  gem 'fog-aws'
 end
 
