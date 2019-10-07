@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     @comments = @post.comments.includes(:user)
     @comment = Comment.new
     respond_to do |format|
-      format.html
+      format.html { redirect_to root_path, alert: '自力で探してください' }
       format.js
     end
   end
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-      redirect_to root_path
+      redirect_to root_path, notice: '記事を投稿しました'
     else
       render :new
     end
@@ -35,12 +35,17 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    if user_signed_in? && current_user.id == @post.user.id
+      render :edit
+    else
+      redirect_to root_path, alert: '記事を編集出来ません。'
+    end
   end
 
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to root_path
+      redirect_to mylist_user_path(@post.user), notice: '記事を編集しました。'
     else
       render :edit
     end
@@ -48,11 +53,11 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    if user_signed_in? && current_user.id == @post.user_id
+    if user_signed_in? && current_user.id == @post.user.id
       @post.destroy
-      redirect_to root_path
+      redirect_to mylist_user_path(@post.user), notice: '記事を削除しました。'
     else
-      render :show
+      redirect_to mylist_user_path(@post.user), alert: '記事を削除出来ませんでした。'
     end
   end
 

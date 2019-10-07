@@ -1,0 +1,16 @@
+.notice{
+  width: 100vw;
+  height: 1.75rem;
+  background: $success;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+.alert{
+  width: 100vw;
+  height: 1.75rem;
+  background: $danger;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}

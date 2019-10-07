@@ -2,9 +2,13 @@
 
 <%= render 'users/upperbar' %>
 
+<%= render 'layouts/notifications' %>
+
 <div class="mylist">
   <div id="modal-section"></div>
   <%= render partial: 'shared/post', collection: @posts %>
 </div>
 
 <%= paginate @posts %>
+
+<%= render 'shared/footer' %>
