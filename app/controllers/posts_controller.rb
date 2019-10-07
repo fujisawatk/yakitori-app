@@ -38,7 +38,7 @@ class PostsController < ApplicationController
     if user_signed_in? && current_user.id == @post.user.id
       render :edit
     else
-      redirect_to mylist_user_path(@post.user), alert: '記事を編集出来ません。'
+      redirect_to root_path, alert: '記事を編集出来ません。'
     end
   end
 

@@ -2,18 +2,7 @@
 
 <%= render 'users/upperbar' %>
 
-<% if flash[:notice] %>
-  <div class="notice">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-
-<% if flash[:alert] %>
-  <div class="alert">
-    <%= flash[:alert] %>
-  </div>
-<% end %>
-
+<%= render 'layouts/notifications' %>
 
 <div class="mylist">
   <div id="modal-section"></div>
