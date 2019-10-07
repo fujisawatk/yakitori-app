@@ -6,7 +6,7 @@
     <%= form_for @post do |f| %>
       <div class="field" id="img-field"> 
         <%= f.label :img, class: "label" %>
-        <%= image_tag "https://bulma.io/images/placeholders/1280x960.png", id: "img_prev", onClick: "$('#post_img').click()" %>
+        <%= image_tag asset_path("no_image.png"), id: "img_prev", onClick: "$('#post_img').click()" %>
         <%= f.file_field :img, id: "post_img", style:"display:none;" %>
         <p class="error">
           <%= @post.errors.full_messages_for(:img)[0] if @post.errors.any? %>
