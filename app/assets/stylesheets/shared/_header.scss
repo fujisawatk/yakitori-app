@@ -2,13 +2,6 @@
   color: #fff;
 } 
 
-#header-span{
-  color: #ccc;
-  line-height: 1.75rem;
-  font-size: 0.75rem;
-  font-weight: bold;
-}
-
 #header-button{
   font-weight: bold;
   font-size: 0.75rem;
@@ -20,9 +13,39 @@
   font-size: 0.75rem;
 }
 
-#header-link{
-  color: #ccc;
-  &:hover{
-    opacity: 0.7;
+@media screen and (min-width: 1023px) {
+  .has-dropdown{
+    display: none;
+  }
+  #header-span{
+    color: #ccc;
+    line-height: 1.75rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+
+  #header-link{
+    color: #ccc;
+    &:hover{
+      opacity: 0.7;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .navbar-menu{
+    background: #f9f9f9;
+  }
+  #header-span{
+    color: #0a0a0a;
+    line-height: 1.75rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+  #header-link{
+    color: #0a0a0a;
+    &:hover{
+      opacity: 0.7;
+    }
   }
 }
