@@ -8,15 +8,17 @@
       <h5 class="subtitle is-5">
         <%= link_to "#{post.user.nickname}", mylist_user_path(post.user),id: "modal-user" %>
       </h5>
-      <%= link_to edit_post_path(post.id), method: :get do %>
-        <span class="icon" id="modal-icon">
-          <i class="far fa-edit"></i>
-        </span>
-      <% end %>
-      <%= link_to post_path(post.id), method: :delete, data: {confirm: "削除しますか？"} do %>
-        <span class="icon" id="modal-icon">
-          <i class="fas fa-trash"></i>
-        </span>
+      <% if current_user %>
+        <%= link_to edit_post_path(post.id), method: :get do %>
+          <span class="icon" id="modal-icon">
+            <i class="far fa-edit"></i>
+          </span>
+        <% end %>
+        <%= link_to post_path(post.id), method: :delete, data: {confirm: "削除しますか？"} do %>
+          <span class="icon" id="modal-icon">
+            <i class="fas fa-trash"></i>
+          </span>
+        <% end %>
       <% end %>
     </header>
     <section class="modal-card-body">
@@ -47,16 +49,18 @@
       </div>
 
       <div class="modal-comment">
-        <%= form_for [@post, @comment] do |f| %>
-          <div class="field">
-            <div class="control">
-              <textarea class= "textarea" id="dummy-area" placeholder="コメントを入力してください"></textarea>
-              <div class="comment-error"></div>
-              <div class="button is-warning" id="dummy-button">コメントする</div>
-              <%= f.text_area :comment, id: "comment-area" %>
-              <%= f.submit class: "button is-warning", id: "comment-button" %>
+        <% if user_signed_in? %>
+          <%= form_for [@post, @comment] do |f| %>
+            <div class="field">
+              <div class="control">
+                <textarea class= "textarea" id="dummy-area" placeholder="コメントを入力してください"></textarea>
+                <div class="comment-error"></div>
+                <div class="button is-warning" id="dummy-button">コメントする</div>
+                <%= f.text_field :comment, id: "comment-area" %>
+                <%= f.submit class: "button is-warning", id: "comment-button" %>
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
         <div class="comment-index">
           <h6 class="title is-6">【コメント一覧】</h6>
