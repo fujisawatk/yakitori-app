@@ -20,7 +20,7 @@ $(function(){
                     ${formData}
                   </p>`;
       $('.comment-index').append(html);
-      $('#comment-area').val(formData);
+      $('#comment-area[type=text]').val(formData);
       $('#dummy-area').val('');
       $('.comment-error').empty();  
     }
