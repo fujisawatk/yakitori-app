@@ -8,7 +8,7 @@
       <h5 class="subtitle is-5">
         <%= link_to "#{post.user.nickname}", mylist_user_path(post.user),id: "modal-user" %>
       </h5>
-      <% if current_user %>
+      <% if user_signed_in? && current_user.id == post.user.id %>
         <%= link_to edit_post_path(post.id), method: :get do %>
           <span class="icon" id="modal-icon">
             <i class="far fa-edit"></i>
