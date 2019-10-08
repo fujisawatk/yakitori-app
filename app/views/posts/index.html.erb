@@ -6,10 +6,11 @@
 
 <%= render 'layouts/notifications' %>
 
-  <div class="contents">
-    <div id="modal-section"></div>
-    <%= render partial: 'shared/post', collection: @posts %>
-  </div>
+<div class="contents">
+  <%= render partial: 'shared/post', collection: @posts %>
+</div>
+
+<div id="modal-section"></div>
 
 <%= paginate @posts %>
 

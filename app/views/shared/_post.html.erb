@@ -1,4 +1,4 @@
-<%= link_to post_path(post), remote: true do %>
+<%= link_to post_path(post), remote: true, class: "post-item" do %>
   <div class="post-card">
     <div class="post-image">
       <%= image_tag post.img.url %>

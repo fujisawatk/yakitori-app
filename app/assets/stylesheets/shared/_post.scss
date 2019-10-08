@@ -1,14 +1,40 @@
+@media screen and (min-width: 1023px) {
+  .post-item{ 
+    width: 22.5%;
+    height: 12rem;
+    margin: 0 10px 20px;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .post-item{ 
+    width: 45%;
+    height: 16rem;
+    margin: 0 10px 20px;
+  }
+}
+
+@media screen and (max-width:605px){
+  .post-item{ 
+    width: 90%;
+    height: 20rem;
+    margin: 0 10px 20px;
+  }
+}
+
 .post-card{
-  width: 20rem;
-  height: 13.25rem;
-  margin: 0 10px 20px;
+  width: 100%;
+  height: 100%;
   position: relative;
   background: #ccc;
   box-shadow: 3px 3px 10px rgba(0,0,0,0.6);
   .post-image{
+    height: 100%;
+    width: 100%;
     img{
-      height: 13.25rem;
-      width: 20rem;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
     }
     .post-content{
       position: absolute;
