@@ -6,13 +6,6 @@
     height: 100%;
     background-color: black;
     opacity: 0.7;
-    #modal-del{
-      float: right;
-      margin: 10px 10px 0 0;
-      &:hover {
-				opacity: 0.7;
-			}
-    }
   }
   .modal-card{
     position: absolute;
@@ -23,29 +16,50 @@
     left: 0;
     bottom: 0;
     right: 0;
-    margin: 0 auto ;
+    margin: 0 auto;
     text-align: center;
     #modal-header{
       background-color: black;
       padding-top: 1.25rem;
       height: 8rem;
-      #modal-user{
-        color: #fff;
-        margin-left: 10px;
-        &:hover {
-          opacity: 0.7;
-          cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      .modal-left{
+        display: flex;
+        #modal-user{
+          color: #fff;
+          margin-left: 10px;
+          font-weight: bold;
+          &:hover {
+            opacity: 0.7;
+            cursor: pointer;
+          }
+        }
+        #modal-icon{
+          color: #fff;
+          margin-left: 1.25rem;
+          font-size: 1.5rem;
+          &:hover {
+            opacity: 0.7;
+          }
         }
       }
-      #modal-icon{
-        color: #fff;
-        margin-left: 1.25rem;
-        font-size: 1.5rem;
-        &:hover {
-          opacity: 0.7;
-        }
-      }  
+      .modal-right{
+        #modal-del{
+          margin-right: 10px;
+          background: $dark;
+          &:hover {
+            opacity: 0.7;
+          }
+        }  
+      }
     }
+    #modal-body{
+      border-bottom : 1px solid #ccc;
+      margin: 20px 60px 0;
+      padding: 0 5rem 20px ;
+      text-align: left;
+    } 
     #modal-line{
       border-bottom : 1px solid #ccc;
       margin: 20px 60px 0;
@@ -71,8 +85,6 @@
       .comment-index{
         padding: 20px 0;
         text-align: left;
-
-
       }
     }
   }

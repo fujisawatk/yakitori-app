@@ -30,6 +30,18 @@
           </div>
         </div>
       <% end %>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link title is-5">
+          種類一覧
+        </a>
+
+        <div class="navbar-dropdown">
+          <% @categories.each do |category| %>
+            <%= link_to "#{category.name}", category_path(category), class: "navbar-item" %>
+          <% end %>
+        </div>
+      </div>
     </div>
 
     <div class="navbar-end">

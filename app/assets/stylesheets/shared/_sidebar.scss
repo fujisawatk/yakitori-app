@@ -1,22 +1,30 @@
-#sidebar {
-  position: fixed;
-  top: 0;
-  width: 380px;
-  height: 35rem;
-  padding: 0 10px 0 0;
-  background: $warning;
-  z-index: 10;
-  display: flex;
-  margin-top: 60px;
-  overflow: scroll;
-  #menu{
-    display: none;
+@media screen and (min-width: 1023px) {
+  #sidebar {
+    position: fixed;
+    top: 0;
+    width: 380px;
+    height: 40rem;
+    padding: 10px 10px 0 0;
+    background: $warning;
+    z-index: 100;
+    display: flex;
+    margin: 4rem 0;
+    overflow: scroll;
+    #menu{
+      display: none;
+    }
+    .hover{
+      writing-mode: vertical-rl;
+      text-align: center;
+      padding-top: 1rem;
+      font-size: 1.5rem;
+      letter-spacing: 1rem;
+    }
   }
-  .hover{
-    writing-mode: vertical-rl;
-    text-align: center;
-    padding-top: 1rem;
-    font-size: 1.5rem;
-    letter-spacing: 1rem;
+}
+
+@media screen and (max-width: 1023px) {
+  #sidebar{
+    display: none;
   }
 }

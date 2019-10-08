@@ -1,25 +1,29 @@
 <div class="modal">
   <div class="modal-background">
-    <button class="delete is-large" id="modal-del" aria-label="close"></button>
   </div>
 
   <div class="modal-card">
     <header class="card-header" id="modal-header">
-      <h5 class="subtitle is-5">
-        <%= link_to "#{post.user.nickname}", mylist_user_path(post.user),id: "modal-user" %>
-      </h5>
-      <% if user_signed_in? && current_user.id == post.user.id %>
-        <%= link_to edit_post_path(post.id), method: :get do %>
-          <span class="icon" id="modal-icon">
-            <i class="far fa-edit"></i>
-          </span>
+      <div class="modal-left">
+        <h5 class="subtitle is-5">
+          <%= link_to "#{post.user.nickname}", mylist_user_path(post.user),id: "modal-user" %>
+        </h5>
+        <% if user_signed_in? && current_user.id == post.user.id %>
+          <%= link_to edit_post_path(post.id), method: :get do %>
+            <span class="icon" id="modal-icon">
+              <i class="far fa-edit"></i>
+            </span>
+          <% end %>
+          <%= link_to post_path(post.id), method: :delete, data: {confirm: "削除しますか？"} do %>
+            <span class="icon" id="modal-icon">
+              <i class="fas fa-trash"></i>
+            </span>
+          <% end %>
         <% end %>
-        <%= link_to post_path(post.id), method: :delete, data: {confirm: "削除しますか？"} do %>
-          <span class="icon" id="modal-icon">
-            <i class="fas fa-trash"></i>
-          </span>
-        <% end %>
-      <% end %>
+      </div>
+      <div class="modal-right">
+        <button class="delete is-large" id="modal-del" aria-label="close"></button>
+      </div>
     </header>
     <section class="modal-card-body">
       <h3 class="modal-card-title subtitle is-3" id="modal-line">
@@ -31,7 +35,7 @@
       <% else %>
         <%= image_tag "https://bulma.io/images/placeholders/1280x960.png",  id: "modal-body" %>
       <% end %>
-      <div class='field' id="modal-line">
+      <div class='field' id="modal-body">
         <p><%= simple_format(post.body) %></p>
       </div>
 
