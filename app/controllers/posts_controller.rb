@@ -1,11 +1,9 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  include SetGon
-  before_action :set_gon, only: [:index, :show]
+  before_action :set_categories, only: [:index, :show]
 
   def index
     @posts = Post.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
-    @categories = Category.all
   end
 
   def new
@@ -16,10 +14,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comments = @post.comments.includes(:user)
     @comment = Comment.new
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def create
@@ -64,6 +58,10 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :body, :img, category_ids: [],
                                 restaurant_attributes: [:id, :name, :url]).merge(user_id: current_user.id)
+  end
+
+  def set_categories
+    @categories = Category.all
   end
 
 end
