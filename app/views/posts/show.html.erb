@@ -1,0 +1,81 @@
+<%= render 'shared/header' %>
+
+<div class="show">
+  <div class="show-background">
+    <div class="show-card">
+      <header class="card-header" id="show-header">
+        <div class="show-left">
+          <h5 class="subtitle is-5">
+            <%= link_to "#{@post.user.nickname}", mylist_user_path(@post.user),id: "show-user" %>
+          </h5>
+          <% if user_signed_in? && current_user.id == @post.user.id %>
+            <%= link_to edit_post_path(@post.id), method: :get do %>
+              <span class="icon" id="show-icon">
+                <i class="far fa-edit"></i>
+              </span>
+            <% end %>
+            <%= link_to post_path(@post.id), method: :delete, data: {confirm: "削除しますか？"} do %>
+              <span class="icon" id="show-icon">
+                <i class="fas fa-trash"></i>
+              </span>
+            <% end %>
+          <% end %>
+        </div>
+      </header>
+      <section class="show-card-body">
+        <h3 class="subtitle is-3" id="show-title">
+          <%= @post.title %>
+        </h3>
+    
+        <% if @post.img.present? %>
+          <%= image_tag @post.img.url, id: "show-line" %>
+        <% else %>
+          <%= image_tag "https://bulma.io/images/placeholders/1280x960.png",  id: "modal-body" %>
+        <% end %>
+        <div class='field' id="show-body">
+          <p><%= simple_format(@post.body) %></p>
+        </div>
+
+        <div class='field' id="show-line">
+          <h6 class="title is-6">【オススメの焼き鳥】</h6>
+          <% @post.categories.each do |category| %>
+            <p><%= category.name %></p>
+          <% end %>
+        </div>
+
+        <div class='field' id="show-line">
+          <h6 class="title is-6">【店舗情報】</h6>
+          <p><%= @post.restaurant.name %></p> 
+          <%= button_to "店舗詳細", "#{@post.restaurant.url}", class: "button"%>
+        </div>
+
+        <div class="show-comment">
+          <% if user_signed_in? %>
+            <%= form_for [@post, @comment] do |f| %>
+              <div class="field">
+                <div class="control">
+                  <%= f.text_area :comment, class: "textarea", id: "comment-area", placeholder: "コメントを入力してください" %>
+                  <div class="comment-error"></div>
+                  <%= f.submit "コメントする", class: "button is-warning", id: "comment-button" %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+          <div class="comment-index">
+            <h6 class="title is-6">【コメント一覧】</h6>
+              <% if @comments %>
+                <% @comments.each do |comment| %>
+                  <p>
+                    <strong><%= link_to comment.user.nickname, mylist_user_path(comment.user) %>：</strong>
+                    <%= comment.comment %>
+                  </p>
+                <% end %>
+              <% end %>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<%= render 'shared/footer' %>
