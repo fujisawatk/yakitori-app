@@ -35,6 +35,28 @@
             opacity: 0.7;
           }
         }
+        #like-icon{
+          color: $danger;
+          margin-left: 1.25rem;
+          font-size: 1.25rem;
+          &:hover {
+            opacity: 0.7;
+          }
+          .like{
+            margin-left: 0.25rem; 
+          }
+        }
+        #nolike-icon{
+          color: black;
+          margin-left: 1.25rem;
+          font-size: 1.25rem;
+          &:hover {
+            opacity: 0.7;
+          }
+          .like{
+            margin-left: 0.25rem; 
+          }
+        }
       }
     }
     .show-card-body{

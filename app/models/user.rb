@@ -27,6 +27,10 @@ class User < ApplicationRecord
     user
   end
 
+  def already_liked?(post)
+    self.likes.exists?(post_id: post.id)
+  end
+
   private
 
   def self.dummy_email(auth)
