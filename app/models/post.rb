@@ -5,6 +5,8 @@ class Post < ApplicationRecord
   has_many :post_category_relations, dependent: :destroy
   has_many :categories, through: :post_category_relations
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
 
   mount_uploader :img, ImgUploader
 
