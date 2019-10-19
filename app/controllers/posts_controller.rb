@@ -1,13 +1,11 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  include SetGon
+  before_action :set_gon, only: [:index, :show]
 
   def index
     @posts = Post.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
     @categories = Category.all
-    if user_signed_in?
-    gon.current_user_id = current_user.id
-    gon.current_user_name = current_user.nickname
-    end
   end
 
   def new
@@ -19,7 +17,7 @@ class PostsController < ApplicationController
     @comments = @post.comments.includes(:user)
     @comment = Comment.new
     respond_to do |format|
-      format.html { redirect_to root_path, alert: '自力で探してください' }
+      format.html
       format.js
     end
   end
