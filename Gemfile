@@ -44,7 +44,6 @@ gem 'font-awesome-sass', '~> 5.4.1'
 gem 'jquery-rails'
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'gon'
 gem 'rails-i18n', '~> 5.1'
 gem 'kaminari'
 
