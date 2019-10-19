@@ -1,28 +1,28 @@
 $(function() {
-  $(document).on('click', '#modal-del', function() {
-    if ($('#comment-area[type=text]').val() != 0){
-      debugger
-      $('form#new_comment').submit();
-    };
-    $('.modal').remove();
+  /*モーダルのURL、アンカー表示*/
+  $('.post-item').click(function(e){
+    e.preventDefault();
+    location.hash = $(this).attr('href');
   });
-  $(document).on('click', '.modal-background', function() {
+  /*モーダルを閉じた時の処理*/
+  var comment = function(){
     if ($('#comment-area[type=text]').val() != 0){
-      debugger
       $('form#new_comment').submit();
-    };
+    }else{
+      location.href = '';
+    }
     $('.modal').remove();
+  }
+  $(document).on('click', '#modal-del', function(i) {
+    comment(i);
   });
-  $(document).on('click', '#modal-user', function() {
-    if ($('#comment-area[type=text]').val() != 0){
-      $('form#new_comment').submit();
-    };
-    $('.modal').remove();
+  $(document).on('click', '.modal-background', function(i) {
+    comment(i);
   });
-  $(document).on('click', '.modal-icon', function() {
-    if ($('#comment-area[type=text]').val() != 0){
-      $('form#new_comment').submit();
-    };
-    $('.modal').remove();
+  $(document).on('click', '#modal-user', function(i) {
+    comment(i);
+  });
+  $(document).on('click', '.modal-icon', function(i) {
+    comment(i);
   });
 });
