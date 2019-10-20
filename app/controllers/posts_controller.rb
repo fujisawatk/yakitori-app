@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_categories, only: [:index, :show]
+  before_action :set_categories, only: [:index, :show, :search]
 
   def index
     @posts = Post.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
@@ -54,6 +54,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    @posts = query.order(created_at: :desc).page(params[:page]).per(8)
+  end
+
   private
 
   def post_params
@@ -63,6 +67,15 @@ class PostsController < ApplicationController
 
   def set_categories
     @categories = Category.all
+  end
+
+  def query
+    if params[:post].present? && params[:post][:keyword]
+      Post.joins(:restaurant).where('title LIKE ? OR body LIKE ? OR name LIKE ?',
+                                    "%#{params[:post][:keyword]}%",
+                                    "%#{params[:post][:keyword]}%",
+                                    "%#{params[:post][:keyword]}%")
+    end
   end
 
 end

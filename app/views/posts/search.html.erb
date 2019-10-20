@@ -1,0 +1,11 @@
+<%= render 'shared/header' %>
+
+<%= render 'shared/upperbar' %>
+
+<div class="contents">
+  <%= render partial: 'shared/post', collection: @posts %>
+</div>
+
+<%= paginate @posts %>
+
+<%= render 'shared/footer' %>
