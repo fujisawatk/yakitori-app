@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :set_categories, only: [:index, :show, :search]
 
   def index
@@ -11,7 +12,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @comments = @post.comments.includes(:user)
     @comment = Comment.new
     @like = Like.new
@@ -27,7 +27,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
     if user_signed_in? && current_user.id == @post.user.id
       render :edit
     else
@@ -36,7 +35,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to mylist_user_path(@post.user), notice: '記事を編集しました。'
     else
@@ -45,7 +43,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     if user_signed_in? && current_user.id == @post.user.id
       @post.destroy
       redirect_to mylist_user_path(@post.user), notice: '記事を削除しました。'
@@ -63,6 +60,10 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :body, :img, category_ids: [],
                                 restaurant_attributes: [:id, :name, :url]).merge(user_id: current_user.id)
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 
   def set_categories
