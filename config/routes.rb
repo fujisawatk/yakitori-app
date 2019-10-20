@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :users, only: :show do
     member do
       get :mylist
+      get :mycomment
+      get :myliked
     end
   end
 
