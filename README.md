@@ -4,22 +4,18 @@ https://yakitori-community.tk/
 [![Image from Gyazo](https://i.gyazo.com/80b0d29fc2fe5bba37de99789cada7eb.jpg)](https://gyazo.com/80b0d29fc2fe5bba37de99789cada7eb)
 
 ## 概要
----
 ### このアプリは、焼き鳥情報共有アプリです。
  ユーザーが実際に行かれた 焼鳥店についての感想、おすすめの焼き鳥、店舗情報を確認することが出来ます。
 
 ## 制作背景
----
  焼き鳥について情報共有出来るアプリを作ってみたいと思い、制作致しました。以前勤めていました焼鳥屋で、お客様から度々「この焼き鳥、どこの部位？」と聞かれることが多く、最初から焼き鳥について知っていたら、お店の良さをより感じてくれるのではと思い、制作に至りました。
 
 
 
 ## 開発・本番環境
----
 **Ruby/Ruby on Rails/Mysql/html・scss(FW: Bulma)/JavaScript・jQuery/AWS(EC2)**
 
 ## 機能
----
 - ユーザー登録機能（メール、Google・twitter認証）
   - メール、Google・twitter認証の３種類でアカウントを作成できます。
   - ログインページにテストユーザー用ログインを配置しています。
@@ -52,8 +48,6 @@ https://yakitori-community.tk/
 - AWSでroutes53・SSL・LoadBalancer・S3の設定
 
 ## これから実装したい機能
----
 - フォロー機能
 ## ER図
----
 [![Image from Gyazo](https://i.gyazo.com/9504f8cfacfa837c162ece0af6235492.png)](https://gyazo.com/9504f8cfacfa837c162ece0af6235492)
