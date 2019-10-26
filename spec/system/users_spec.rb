@@ -16,6 +16,19 @@ describe 'Users', type: :system do
         expect(page).to have_selector 'a[data-method=delete]', text: 'ログアウト'
       end.to change(User, :count).by(1)
     end
+
+    it '既にアカウントが存在する場合、登録されないこと' do
+      user = FactoryBot.create(:user, email: 'test1234@example.com')
+
+      visit new_user_registration_path
+      fill_in 'user_nickname', with: 'テスト太郎'
+      fill_in 'user_email', with: 'test1234@example.com'
+      fill_in 'user_password', with: 'test1234'
+      fill_in 'user_password_confirmation', with: 'test1234'
+      click_button '新規登録'
+
+      expect(page).to have_content 'メールアドレスは既に使用されています。'
+    end
   end
 
   describe 'SNS認証での新規登録' do
@@ -52,7 +65,6 @@ describe 'Users', type: :system do
     end
 
     it 'SNSアカウントを持たない場合、ログインページにリダイレクトされること' do
-      
       visit root_path
       find('#twitter-signup').click
       allow(User).to receive(:from_omniauth).and_return(nil)
