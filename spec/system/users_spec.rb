@@ -18,6 +18,49 @@ describe 'Users', type: :system do
     end
   end
 
+  describe 'SNS認証での新規登録' do
+    before do
+      Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:twitter]
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
+      OmniAuth.config.mock_auth[:twitter] = nil
+      OmniAuth.config.mock_auth[:google_oauth2] = nil
+      OmniAuth.config.mock_auth[:twitter] = twitter_mock
+      OmniAuth.config.mock_auth[:google_oauth2] = google_oauth2_mock
+    end
+
+    it 'Twitterアカウントで新規登録出来ること' do
+      expect do
+        visit root_path
+        find('#twitter-signup').click
+        
+        expect(page).to have_content 'SNS認証でログインしました。'
+        expect(page).to have_link '投稿する'
+        expect(page).to have_selector 'a[data-method=delete]', text: 'ログアウト'
+      end.to change(User, :count).by(1)
+    end
+
+    it 'Googleアカウントで新規登録出来ること' do
+      expect do
+        visit root_path
+        find('#google-signup').click
+        
+        expect(page).to have_content 'SNS認証でログインしました。'
+        expect(page).to have_link '投稿する'
+        expect(page).to have_selector 'a[data-method=delete]', text: 'ログアウト'
+      end.to change(User, :count).by(1)
+    end
+
+    it 'SNSアカウントを持たない場合、ログインページにリダイレクトされること' do
+      
+      visit root_path
+      find('#twitter-signup').click
+      allow(User).to receive(:from_omniauth).and_return(nil)
+
+      expect(page).to have_current_path root_path
+    end
+  end
+
   describe 'ログイン機能' do
     let(:user) do
       FactoryBot.create(:user)
@@ -32,6 +75,49 @@ describe 'Users', type: :system do
       expect(page).to have_content 'ログインしました。'
       expect(page).to have_link '投稿する'
       expect(page).to have_selector 'a[data-method=delete]', text: 'ログアウト'
+    end
+
+    describe 'SNS認証でのログイン機能' do
+      before do
+        Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
+        Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:twitter]
+        Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
+        OmniAuth.config.mock_auth[:twitter] = nil
+        OmniAuth.config.mock_auth[:google_oauth2] = nil
+        OmniAuth.config.mock_auth[:twitter] = twitter_mock
+        OmniAuth.config.mock_auth[:google_oauth2] = google_oauth2_mock
+      end
+      it 'Twitterアカウントでログイン出来ること' do
+        user = FactoryBot.create(:user, nickname: 'twitter-user',
+                                        provider: 'twitter',
+                                        uid: "0000000000000000000"
+                                )
+
+        expect do
+          visit new_user_session_path
+          find('#twitter-login').click
+
+          expect(page).to have_content 'SNS認証でログインしました。'
+          expect(page).to have_link '投稿する'
+          expect(page).to have_selector 'a[data-method=delete]', text: 'ログアウト'
+        end.to_not change(User, :count)
+      end
+  
+      it 'Googleアカウントでログイン出来ること' do
+        user = FactoryBot.create(:user, nickname: 'google-user',
+                                        provider: 'google_oauth2',
+                                        uid: "100000000000000000000"
+                                )
+
+        expect do
+          visit new_user_session_path
+          find('#google-login').click
+
+          expect(page).to have_content 'SNS認証でログインしました。'
+          expect(page).to have_link '投稿する'
+          expect(page).to have_selector 'a[data-method=delete]', text: 'ログアウト'
+        end.to_not change(User, :count)
+      end
     end
   end
 

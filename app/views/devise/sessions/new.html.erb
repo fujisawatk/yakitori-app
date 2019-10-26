@@ -24,11 +24,11 @@
         <%= f.submit "ログイン", class: "sign-button" %>
       </div>
 
-      <%= link_to user_twitter_omniauth_authorize_path, method: :post, class: "button is-info is-rounded" do %>
+      <%= link_to user_twitter_omniauth_authorize_path, method: :post, class: "button is-info is-rounded", id: "twitter-login" do %>
         <i class="fab fa-twitter"></i>
         <span class="login-link">でログイン</span>
       <% end %>
-      <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "button is-rounded" do %>
+      <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "button is-rounded", id: "google-login" do %>
         <i class="fab fa-google"></i>
         <span class="login-link">でログイン</span>
       <% end %>
