@@ -299,9 +299,7 @@ Devise.setup do |config|
 
   config.omniauth :google_oauth2,
     Rails.application.credentials.google_oauth2[:google_client_id],
-    Rails.application.credentials.google_oauth2[:google_client_secret],
-    scope: 'userinfo.email, userinfo.profile',
-    redirect_uri: "#{Rails.application.credentials.production_url[:host_domain]}/users/auth/google_oauth2/callback"
+    Rails.application.credentials.google_oauth2[:google_client_secret],{}
 
   config.omniauth :twitter,
     Rails.application.credentials.twitter[:twitter_api_key],
