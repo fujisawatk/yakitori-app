@@ -43,12 +43,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if user_signed_in? && current_user.id == @post.user.id
-      @post.destroy
-      redirect_to mylist_user_path(@post.user), notice: '記事を削除しました。'
-    else
-      redirect_to mylist_user_path(@post.user), alert: '記事を削除出来ませんでした。'
-    end
+    @post.destroy
+    redirect_to mylist_user_path(@post.user), notice: '記事を削除しました。'
   end
 
   def search
