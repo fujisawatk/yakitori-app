@@ -20,7 +20,7 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -59,4 +59,21 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::IntegrationHelpers, type: :system
+
+  # ヘッドレスモード（画面を起動しないモード）でChromeを実行する設定
+  config.before(:each) do |example|
+    if example.metadata[:type] == :system
+      driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
+    end
+  end
+  
+  # OmniAuthをテストモードに変更
+  OmniAuth.config.test_mode = true
+  # OmniAuth用モック
+  config.include OmniauthMocks
+  # 非表示要素を検索対象にするための設定
+  Capybara.ignore_hidden_elements = false
+  # ajaxの処理完了を待つためのヘルパーメソッド
+  config.include WaitForAjax, type: :system
 end

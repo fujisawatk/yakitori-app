@@ -21,10 +21,10 @@
           <div class="field is-grouped">
             <%= link_to "メールで新規登録", new_user_registration_path, class: "button is-warning", id: "header-button" %>
             <span id="header-span">または</span>
-            <%= link_to user_twitter_omniauth_authorize_path, method: :post, class: "button is-info", id: "header-icon" do %>
+            <%= link_to user_twitter_omniauth_authorize_path, method: :post, class: "button is-info", id: "twitter-signup" do %>
               <i class="fab fa-twitter"></i>
             <% end %>
-            <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "button", id: "header-icon" do %>
+            <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "button", id: "google-signup" do %>
               <i class="fab fa-google"></i>
             <% end %>
           </div>
@@ -52,7 +52,7 @@
               <%= f.text_field :keyword, class: "input is-small", placeholder: "キーワードを入力" %>
             </div>
             <div class="control">
-              <%= button_tag type: 'submit', class: "button is-small is-warning" do %>
+              <%= button_tag type: 'submit', class: "button is-small is-warning", id: "search-button" do %>
                 <i class="fas fa-search"></i>
               <% end %>
             </div>
