@@ -32,12 +32,12 @@
           <% end %>
 
           <% if user_signed_in? && current_user.id == @post.user.id %>
-            <%= link_to edit_post_path(@post.id), method: :get do %>
+            <%= link_to edit_post_path(@post.id), method: :get, id: "edit-icon" do %>
               <span class="icon" id="show-icon">
                 <i class="far fa-edit"></i>
               </span>
             <% end %>
-            <%= link_to post_path(@post.id), method: :delete, data: {confirm: "削除しますか？"} do %>
+            <%= link_to post_path(@post.id), method: :delete, id: "del-icon", data: {confirm: "削除しますか？"} do %>
               <span class="icon" id="show-icon">
                 <i class="fas fa-trash"></i>
               </span>
