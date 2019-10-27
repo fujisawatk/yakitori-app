@@ -10,14 +10,14 @@
           </h5>
           <% if user_signed_in?%>
             <% if current_user.already_liked?(@post) %>
-              <%= link_to post_like_path(@post), method: :delete do %>
+              <%= link_to post_like_path(@post), method: :delete, id: "like" do %>
                 <span class="icon" id="like-icon">
                   <i class="fa fa-heart"></i>
                   <p class= "like"><%= @post.likes.count %></p>
                 </span>
               <% end %>
             <% else %>
-              <%= link_to post_likes_path(@post), method: :post do %>
+              <%= link_to post_likes_path(@post), method: :post, id: "nolike" do %>
                 <span class="icon" id="nolike-icon">
                   <i class="fa fa-heart"></i>
                   <p class= "like"><%= @post.likes.count %></p>
