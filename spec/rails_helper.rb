@@ -72,4 +72,8 @@ RSpec.configure do |config|
   OmniAuth.config.test_mode = true
   # OmniAuth用モック
   config.include OmniauthMocks
+  # 非表示要素を検索対象にするための設定
+  Capybara.ignore_hidden_elements = false
+  # ajaxの処理完了を待つためのヘルパーメソッド
+  config.include WaitForAjax, type: :system
 end
