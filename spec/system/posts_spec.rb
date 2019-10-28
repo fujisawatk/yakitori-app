@@ -48,6 +48,18 @@ describe 'Posts', type: :system do
         expect(page).to have_content '記事を投稿しました'
       end.to change(Post, :count).by(1)
     end
+
+    it '未記入の項目があれば、入力した値を残して投稿画面にリダイレクトされる' do
+      expect do
+        fill_in 'タイトル', with: ''
+        fill_in '本文', with: '美味しい！'
+        click_button '投稿する'
+        
+        expect(page).to have_content '投稿する'
+        expect(page).to have_content 'タイトルを入力してください'
+        expect(find_field('本文').value).to eq('美味しい！')
+      end.to_not change(Post, :count)
+    end
   end
 
   describe '記事詳細表示機能' do
@@ -139,6 +151,20 @@ describe 'Posts', type: :system do
         end.to_not change(Post, :count) 
       end
 
+      it '未記入の項目があれば、入力した値を残して編集画面にリダイレクトされる' do
+        expect do
+          visit post_path(@post)
+          find("#edit-icon").click
+
+          fill_in 'タイトル', with: ''
+          click_button '変更する'
+          
+          expect(page).to have_content '編集する'
+          expect(page).to have_content 'タイトルを入力してください'
+          expect(find_field('本文').value).to eq('未編集の本文')
+        end.to_not change(Post, :count)
+      end
+
       it '記事を削除出来ること' do
         expect do
           visit post_path(@post)
@@ -149,7 +175,7 @@ describe 'Posts', type: :system do
 
           expect(page).to have_current_path mylist_user_path(user_a)
           expect(page).to have_content '記事を削除しました。'
-        end
+        end.to change(Post, :count).by(-1)
       end
     end
     context '記事を投稿していないユーザー' do
