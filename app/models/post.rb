@@ -28,5 +28,4 @@ class Post < ApplicationRecord
   def category_check
     errors.add(:category_ids, 'のおすすめを選択してください') if !category_ids.present?
   end
-
 end

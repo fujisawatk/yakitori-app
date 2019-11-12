@@ -75,5 +75,4 @@ class PostsController < ApplicationController
                                     "%#{params[:post][:keyword]}%")
     end
   end
-
 end

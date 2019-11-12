@@ -23,5 +23,4 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @categories = Category.all
   end
-
 end

@@ -8,5 +8,4 @@ class Restaurant < ApplicationRecord
   def restaurant_check
     errors.add(:name, 'を登録してください') if !name.present?
   end
-
 end
