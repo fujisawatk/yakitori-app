@@ -11,7 +11,7 @@ describe Comment do
       it "commentが200文字以下であれば登録出来ること" do
         num = 200
         com = "a" * num
-        comment = build(:comment, comment: com )
+        comment = build(:comment, comment: com)
         expect(comment).to be_valid
       end
     end
@@ -26,7 +26,7 @@ describe Comment do
       it "commentが200文字以上では登録出来ないこと" do
         num = 201
         com = "a" * num
-        comment = build(:comment, comment: com )
+        comment = build(:comment, comment: com)
         comment.valid?
         expect(comment.errors[:comment]).to include("は200文字以内で入力してください")
       end
