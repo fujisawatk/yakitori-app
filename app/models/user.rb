@@ -19,8 +19,7 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
-
-    unless user
+    if user.nil?
       user = User.create(
         uid: auth.uid,
         provider: auth.provider,
