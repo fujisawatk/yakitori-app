@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :search]
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :set_categories, only: [:index, :show, :search]
+  before_action :authenticate_user!, except: %i[index show search]
+  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_categories, only: %i[index show search]
 
   def index
     @posts = Post.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
@@ -57,7 +57,7 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post)
-          .permit(:title, :body, :img, category_ids: [], restaurant_attributes: [:id, :name, :url])
+          .permit(:title, :body, :img, category_ids: [], restaurant_attributes: %i[id name url])
           .merge(user_id: current_user.id)
   end
 
