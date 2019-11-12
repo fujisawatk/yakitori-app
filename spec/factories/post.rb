@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :post do
-    title     { "おすすめです！" }
+    title     { 'おすすめです！' }
     body      { Faker::Lorem.sentence }
     img       { File.open("#{Rails.root}/spec/factories/images/test.jpeg") }
     user
@@ -10,7 +10,7 @@ FactoryBot.define do
     after(:build) do |post|
       post.categories = []
       post.restaurant = FactoryBot.build(:restaurant, post: post)
-      post.categories << FactoryBot.build(:category, name: "もも")
+      post.categories << FactoryBot.build(:category, name: 'もも')
     end
   end
 end

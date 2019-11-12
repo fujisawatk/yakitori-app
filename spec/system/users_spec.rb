@@ -35,7 +35,7 @@ describe 'Users', type: :system do
 
   describe 'SNS認証での新規登録' do
     before do
-      Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
+      Rails.application.env_config['devise.mapping'] = Devise.mappings[:user]
       Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:twitter]
       Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
       OmniAuth.config.mock_auth[:twitter] = nil
@@ -93,7 +93,7 @@ describe 'Users', type: :system do
 
     describe 'SNS認証でのログイン機能' do
       before do
-        Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
+        Rails.application.env_config['devise.mapping'] = Devise.mappings[:user]
         Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:twitter]
         Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
         OmniAuth.config.mock_auth[:twitter] = nil
@@ -104,7 +104,7 @@ describe 'Users', type: :system do
       it 'Twitterアカウントでログイン出来ること' do
         FactoryBot.create(:user, nickname: 'twitter-user',
                                  provider: 'twitter',
-                                 uid: "0000000000000000000")
+                                 uid: '0000000000000000000')
 
         expect do
           visit new_user_session_path
@@ -119,7 +119,7 @@ describe 'Users', type: :system do
       it 'Googleアカウントでログイン出来ること' do
         FactoryBot.create(:user, nickname: 'google-user',
                                  provider: 'google_oauth2',
-                                 uid: "100000000000000000000")
+                                 uid: '100000000000000000000')
 
         expect do
           visit new_user_session_path

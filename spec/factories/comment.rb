@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :comment do
-    comment { "ありがとう" }
+    comment { 'ありがとう' }
     user
     post
   end

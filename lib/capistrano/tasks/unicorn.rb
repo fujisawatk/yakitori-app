@@ -30,7 +30,7 @@ namespace :unicorn do
   end
 
   # unicornをスタートさせるtask
-  desc "Start unicorn server"
+  desc 'Start unicorn server'
   task start: :environment do
     on roles(:app) do
       start_unicorn
@@ -38,7 +38,7 @@ namespace :unicorn do
   end
 
   # unicornを停止させるtask
-  desc "Stop unicorn server gracefully"
+  desc 'Stop unicorn server gracefully'
   task stop: :environment do
     on roles(:app) do
       stop_unicorn
@@ -46,7 +46,7 @@ namespace :unicorn do
   end
 
   # 既にunicornが起動している場合再起動を、まだの場合起動を行うtask
-  desc "Restart unicorn server gracefully"
+  desc 'Restart unicorn server gracefully'
   task restart: :environment do
     on roles(:app) do
       if test("[ -f #{fetch(:unicorn_pid)} ]")
@@ -58,7 +58,7 @@ namespace :unicorn do
   end
 
   # unicornを強制終了させるtask
-  desc "Stop unicorn server immediately"
+  desc 'Stop unicorn server immediately'
   task force_stop: :environment do
     on roles(:app) do
       force_stop_unicorn
