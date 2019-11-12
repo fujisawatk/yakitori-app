@@ -21,13 +21,13 @@ class Post < ApplicationRecord
 
   def img_check
     if img.present?
-      errors.add(:img, 'の拡張子がJPEGまたはPNGを挿入してください') if !img.content_type.in?(%('image/jpeg image/png'))
+      errors.add(:img, 'の拡張子がJPEGまたはPNGを挿入してください') unless img.content_type.in?(%('image/jpeg image/png'))
     else
       errors.add(:img, 'を挿入してください')
     end
   end
 
   def category_check
-    errors.add(:category_ids, 'のおすすめを選択してください') if !category_ids.present?
+    errors.add(:category_ids, 'のおすすめを選択してください') unless category_ids.present?
   end
 end
