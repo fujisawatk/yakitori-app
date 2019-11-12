@@ -4,8 +4,9 @@ class Restaurant < ApplicationRecord
   validate :restaurant_check
 
   private
-    def restaurant_check
-      errors.add(:name, 'を登録してください') if !name.present?
-    end
+
+  def restaurant_check
+    errors.add(:name, 'を登録してください') if !name.present?
+  end
 
 end
