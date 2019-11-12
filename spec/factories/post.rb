@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :post do
-    title     {"おすすめです！"}
-    body      {Faker::Lorem.sentence}
-    img       {File.open("#{Rails.root}/spec/factories/images/test.jpeg")}
+    title     { "おすすめです！" }
+    body      { Faker::Lorem.sentence }
+    img       { File.open("#{Rails.root}/spec/factories/images/test.jpeg") }
     user
 
     after(:build) do |post|

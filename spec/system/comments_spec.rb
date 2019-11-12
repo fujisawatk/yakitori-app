@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe 'Comments', type: :system do
-  let(:user_a) {  FactoryBot.create(:user, nickname: 'user_a', email: 'test@example.com')}
-  let(:user_b) {  FactoryBot.create(:user, nickname: 'user_b', email: 'testb@example.com')}
+  let(:user_a) {  FactoryBot.create(:user, nickname: 'user_a', email: 'test@example.com') }
+  let(:user_b) {  FactoryBot.create(:user, nickname: 'user_b', email: 'testb@example.com') }
   let(:post) { FactoryBot.create(:post, user: user_a) }
 
   describe 'コメント機能' do

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe 'Posts', type: :system do
-  let(:user_a) {  FactoryBot.create(:user, nickname: 'user_a', email: 'test@example.com')}
-  let(:user_b) {  FactoryBot.create(:user, nickname: 'user_b', email: 'testb@example.com')}
+  let(:user_a) {  FactoryBot.create(:user, nickname: 'user_a', email: 'test@example.com') }
+  let(:user_b) {  FactoryBot.create(:user, nickname: 'user_b', email: 'testb@example.com') }
 
   describe '記事投稿機能' do
     before do
