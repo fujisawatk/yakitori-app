@@ -36,7 +36,7 @@ describe User do
         user.valid?
         expect(user.errors[:nickname]).to include("を入力してください")
       end
-      
+
       it "nicknameが51文字以上では登録できないこと" do
         str = "a"
         num = 51

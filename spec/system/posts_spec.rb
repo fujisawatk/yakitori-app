@@ -17,13 +17,13 @@ describe 'Posts', type: :system do
         fill_in 'タイトル', with: '焼き鳥'
         fill_in '本文', with: '美味しい！'
         check 'もも'
-        
+
         fill_in 'key', with: '鳥貴族 鶴見東口店'
         click_button('検索')
         wait_for_ajax
         find("input[data-id='0']").click
         click_button '投稿する'
-        
+
         expect(page).to have_current_path root_path
         expect(page).to have_content '記事を投稿しました'
       end.to change(Post, :count).by(1)
@@ -37,13 +37,13 @@ describe 'Posts', type: :system do
         check 'もも'
         check 'むね'
         check 'ねぎま'
-        
+
         fill_in 'key', with: '鳥貴族 鶴見東口店'
         click_button('検索')
         wait_for_ajax
         find("input[data-id='0']").click
         click_button '投稿する'
-        
+
         expect(page).to have_current_path root_path
         expect(page).to have_content '記事を投稿しました'
       end.to change(Post, :count).by(1)
@@ -54,7 +54,7 @@ describe 'Posts', type: :system do
         fill_in 'タイトル', with: ''
         fill_in '本文', with: '美味しい！'
         click_button '投稿する'
-        
+
         expect(page).to have_content '投稿する'
         expect(page).to have_content 'タイトルを入力してください'
         expect(find_field('本文').value).to eq('美味しい！')
@@ -92,7 +92,7 @@ describe 'Posts', type: :system do
       before do
         sign_in(user_b)
       end
-      
+
       it '記事の詳細を閲覧出来るが、編集・削除機能を選択出来ないこと' do
         visit root_path
         first(:css, '.post-item').click
@@ -139,10 +139,10 @@ describe 'Posts', type: :system do
           wait_for_ajax
           find("input[data-id='0']").click
           click_button '変更する'
-          
+
           expect(page).to have_current_path mylist_user_path(user_a)
           expect(page).to have_content '記事を編集しました。'
-        end.to_not change(Post, :count) 
+        end.to_not change(Post, :count)
       end
 
       it '未記入の項目があれば、入力した値を残して編集画面にリダイレクトされる' do
@@ -152,7 +152,7 @@ describe 'Posts', type: :system do
 
           fill_in 'タイトル', with: ''
           click_button '変更する'
-          
+
           expect(page).to have_content '編集する'
           expect(page).to have_content 'タイトルを入力してください'
           expect(find_field('本文').value).to eq('未編集の本文')
@@ -200,5 +200,3 @@ describe 'Posts', type: :system do
     end
   end
 end
-      
-

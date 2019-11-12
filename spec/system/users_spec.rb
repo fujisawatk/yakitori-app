@@ -46,7 +46,7 @@ describe 'Users', type: :system do
       expect do
         visit root_path
         find('#twitter-signup').click
-        
+
         expect(page).to have_content 'SNS認証でログインしました。'
         expect(page).to have_link '投稿する'
         expect(page).to have_selector 'a[data-method=delete]', text: 'ログアウト'
@@ -57,7 +57,7 @@ describe 'Users', type: :system do
       expect do
         visit root_path
         find('#google-signup').click
-        
+
         expect(page).to have_content 'SNS認証でログインしました。'
         expect(page).to have_link '投稿する'
         expect(page).to have_selector 'a[data-method=delete]', text: 'ログアウト'
@@ -113,7 +113,7 @@ describe 'Users', type: :system do
           expect(page).to have_selector 'a[data-method=delete]', text: 'ログアウト'
         end.to_not change(User, :count)
       end
-  
+
       it 'Googleアカウントでログイン出来ること' do
         user = FactoryBot.create(:user, nickname: 'google-user',
                                         provider: 'google_oauth2',

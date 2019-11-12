@@ -11,7 +11,6 @@ class User < ApplicationRecord
   has_many :liked_users, through: :likes, source: :user
 
   validates :nickname, presence: true, length: { maximum: 50 }
-  
   def self.from_omniauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
 

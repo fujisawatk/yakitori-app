@@ -27,13 +27,13 @@ describe 'Comments', type: :system do
           expect(page).to have_selector '#comment-area'
           fill_in 'comment-area', with: 'ユーザーBのコメント'
           click_button 'comment-button'
-          
+
           expect(page).to have_content 'ユーザーBのコメント'
           expect(page).to have_link 'user_b'
         end.to change(Comment, :count).by(1)
       end
     end
-    
+
     context '未ログインユーザー' do
       before do
         @post = FactoryBot.create(:post, user: user_a)
@@ -51,7 +51,7 @@ describe 'Comments', type: :system do
         expect(page).to have_link 'user_a'
 
         expect(page).to_not have_selector '#comment-area'
-        expect(page).to_not have_link 'コメントする'             
+        expect(page).to_not have_link 'コメントする'
       end
     end
   end

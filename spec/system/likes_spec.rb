@@ -40,7 +40,7 @@ describe 'Likes', type: :system do
         end.to change(Like, :count).by(0)
       end
     end
-    
+
     context '未ログインユーザー' do
       before do
         @post = FactoryBot.create(:post, user: user_a)

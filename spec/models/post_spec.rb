@@ -71,14 +71,14 @@ describe Post do
         post.valid?
         expect(post.errors[:img]).to include("の拡張子がJPEGまたはPNGを挿入してください")
       end
-      
+
       it "categoryが空では登録出来ないこと" do
         post = build(:post)
         post.categories.clear
         post.valid?
         expect(post.errors[:category_ids]).to include("のおすすめを選択してください")
       end
-      
+
       it "restrauntが空では登録出来ないこと" do
         post = build(:post)
         post.restaurant.name = ""
