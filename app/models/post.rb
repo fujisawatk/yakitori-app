@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Post < ApplicationRecord
   belongs_to :user
   has_one :restaurant, dependent: :destroy
@@ -14,18 +16,21 @@ class Post < ApplicationRecord
   validates :body, length: { maximum: 1000 }, presence: true
   validate :category_check
   validate :img_check
+  def already_liked?(user)
+    likes.find_by(user_id: user.id)
+  end
 
   private
-    def img_check
-      if img.present?
-          errors.add(:img, 'の拡張子がJPEGまたはPNGを挿入してください') if !img.content_type.in?(%('image/jpeg image/png'))
-      else
-        errors.add(:img, 'を挿入してください')
-      end
-    end
 
-    def category_check
-      errors.add(:category_ids, 'のおすすめを選択してください') if !category_ids.present?
+  def img_check
+    if img.present?
+      errors.add(:img, 'の拡張子がJPEGまたはPNGを挿入してください') unless img.content_type.in?(%('image/jpeg image/png'))
+    else
+      errors.add(:img, 'を挿入してください')
     end
+  end
 
+  def category_check
+    errors.add(:category_ids, 'のおすすめを選択してください') unless category_ids.present?
+  end
 end

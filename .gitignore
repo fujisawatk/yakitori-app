@@ -25,6 +25,7 @@
 
 /public/uploads
 /coverage
+.rubocop_todo.yml
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

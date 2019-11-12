@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :set_params
-  
   def mylist
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(8)
   end
@@ -23,5 +24,4 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @categories = Category.all
   end
-
 end

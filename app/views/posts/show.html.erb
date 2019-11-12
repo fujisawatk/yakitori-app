@@ -9,7 +9,7 @@
             <%= link_to "#{@post.user.nickname}", mylist_user_path(@post.user),id: "show-user" %>
           </h5>
           <% if user_signed_in?%>
-            <% if current_user.already_liked?(@post) %>
+            <% if @post.already_liked?(current_user) %>
               <%= link_to post_like_path(@post), method: :delete, id: "like" do %>
                 <span class="icon" id="like-icon">
                   <i class="fa fa-heart"></i>
