@@ -18,7 +18,7 @@ describe 'Users', type: :system do
     end
 
     it '既にアカウントが存在する場合、登録されないこと' do
-      user = FactoryBot.create(:user, email: 'test1234@example.com')
+      FactoryBot.create(:user, email: 'test1234@example.com')
 
       visit new_user_registration_path
       fill_in 'user_nickname', with: 'テスト太郎'
@@ -100,9 +100,9 @@ describe 'Users', type: :system do
         OmniAuth.config.mock_auth[:google_oauth2] = google_oauth2_mock
       end
       it 'Twitterアカウントでログイン出来ること' do
-        user = FactoryBot.create(:user, nickname: 'twitter-user',
-                                        provider: 'twitter',
-                                        uid: "0000000000000000000")
+        FactoryBot.create(:user, nickname: 'twitter-user',
+                                 provider: 'twitter',
+                                 uid: "0000000000000000000")
 
         expect do
           visit new_user_session_path
@@ -115,9 +115,9 @@ describe 'Users', type: :system do
       end
 
       it 'Googleアカウントでログイン出来ること' do
-        user = FactoryBot.create(:user, nickname: 'google-user',
-                                        provider: 'google_oauth2',
-                                        uid: "100000000000000000000")
+        FactoryBot.create(:user, nickname: 'google-user',
+                                 provider: 'google_oauth2',
+                                 uid: "100000000000000000000")
 
         expect do
           visit new_user_session_path
