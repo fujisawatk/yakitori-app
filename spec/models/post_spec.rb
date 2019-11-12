@@ -86,7 +86,6 @@ describe Post do
         post.valid?
         expect(post.restaurant.errors[:name]).to include("を登録してください")
       end
-
     end
   end
 end

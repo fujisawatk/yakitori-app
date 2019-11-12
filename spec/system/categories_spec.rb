@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'Categories', type: :system do
-
   describe 'カテゴリーページ' do
     before do
       @post = FactoryBot.create(:post)
