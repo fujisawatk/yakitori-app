@@ -70,11 +70,10 @@ class PostsController < ApplicationController
   end
 
   def query
-    if params[:post].present? && params[:post][:keyword]
-      Post.joins(:restaurant).where('title LIKE ? OR body L IKE ? OR name LIKE ?',
-                                    "%#{params[:post][:keyword]}%",
-                                    "%#{params[:post][:keyword]}%",
-                                    "%#{params[:post][:keyword]}%")
-    end
+    params[:post].present? && params[:post][:keyword]
+    Post.joins(:restaurant).where('title LIKE ? OR body L IKE ? OR name LIKE ?',
+                                  "%#{params[:post][:keyword]}%",
+                                  "%#{params[:post][:keyword]}%",
+                                  "%#{params[:post][:keyword]}%")
   end
 end
