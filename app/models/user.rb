@@ -11,6 +11,10 @@ class User < ApplicationRecord
   has_many :liked_users, through: :likes, source: :user
 
   validates :nickname, presence: true, length: { maximum: 50 }
+  def already_liked?(post)
+    self.likes.exists?(post_id: post.id)
+  end
+
   def self.from_omniauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
@@ -25,12 +29,6 @@ class User < ApplicationRecord
     end
     user
   end
-
-  def already_liked?(post)
-    self.likes.exists?(post_id: post.id)
-  end
-
-  private
 
   def self.dummy_email(auth)
     "#{auth.uid}-#{auth.provider}@example.com"
