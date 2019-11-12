@@ -21,7 +21,7 @@ module OmniauthMocks
       info: {
         email: "google-email@example.com",
         name: "google-user"
-        }
-      })
+      }
+    })
   end
 end
