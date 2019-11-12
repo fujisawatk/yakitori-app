@@ -1,0 +1,45 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  # 除外するディレクトリ（自動生成されたファイル）
+  # デフォルト設定にある"vendor/**/*"が無効化されないように記述
+  Exclude:
+    - vendor/**/*
+    - bin/*
+    - db/**/*
+    - config/**/*
+    - Gemfile
+
+# Rails用に最適化されたモード
+Rails:
+  Enabled: true
+
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
+# 最大のメソッド行数
+Metrics/MethodLength:
+  Max: 15
+
+# 最大の構文長さ
+Metrics/AbcSize:
+  Max: 18
+
+# 行の長さ
+Metrics/LineLength:
+  Max: 160
+
+# ブロック行数制限を除外
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'lib/**/*'
+
+# ネストしたModule/Classを定義する際のスタイル変更を無効
+ClassAndModuleChildren:
+  Enabled: false
+
+# ドキュメントの無いpublic classを許可
+Style/Documentation:
+  Enabled: false
