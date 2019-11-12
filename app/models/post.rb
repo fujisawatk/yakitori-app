@@ -16,6 +16,9 @@ class Post < ApplicationRecord
   validates :body, length: { maximum: 1000 }, presence: true
   validate :category_check
   validate :img_check
+  def already_liked?(user)
+    likes.find_by(user_id: user.id)
+  end
 
   private
 
