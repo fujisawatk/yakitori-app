@@ -102,8 +102,7 @@ describe 'Users', type: :system do
       it 'Twitterアカウントでログイン出来ること' do
         user = FactoryBot.create(:user, nickname: 'twitter-user',
                                         provider: 'twitter',
-                                        uid: "0000000000000000000"
-                                )
+                                        uid: "0000000000000000000")
 
         expect do
           visit new_user_session_path
@@ -118,8 +117,7 @@ describe 'Users', type: :system do
       it 'Googleアカウントでログイン出来ること' do
         user = FactoryBot.create(:user, nickname: 'google-user',
                                         provider: 'google_oauth2',
-                                        uid: "100000000000000000000"
-                                )
+                                        uid: "100000000000000000000")
 
         expect do
           visit new_user_session_path
