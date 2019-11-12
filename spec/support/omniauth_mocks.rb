@@ -1,5 +1,4 @@
 module OmniauthMocks
-
   def twitter_mock
     OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
       "provider" => "twitter",
