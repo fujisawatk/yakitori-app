@@ -77,9 +77,7 @@ RSpec.configure do |config|
 
   # ヘッドレスモード（画面を起動しないモード）でChromeを実行する設定
   config.before(:each) do |example|
-    if example.metadata[:type] == :system
-      driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
-    end
+    driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400] if example.metadata[:type] == :system
   end
 
   # OmniAuthをテストモードに変更
