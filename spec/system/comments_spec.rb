@@ -9,9 +9,7 @@ describe 'Comments', type: :system do
     context 'ログインユーザー' do
       before do
         @post = FactoryBot.create(:post, user: user_a)
-        @comment = FactoryBot.create(:comment, comment: "ユーザーAのコメント",
-          post: @post
-        )
+        @comment = FactoryBot.create(:comment, comment: "ユーザーAのコメント", post: @post)
         sign_in(user_b)
       end
 
@@ -39,9 +37,7 @@ describe 'Comments', type: :system do
     context '未ログインユーザー' do
       before do
         @post = FactoryBot.create(:post, user: user_a)
-        @comment = FactoryBot.create(:comment, comment: "ユーザーAのコメント",
-          post: @post
-        )
+        @comment = FactoryBot.create(:comment, comment: "ユーザーAのコメント", post: @post)
       end
 
       it 'コメントの閲覧は出来るが、投稿は出来ないこと' do

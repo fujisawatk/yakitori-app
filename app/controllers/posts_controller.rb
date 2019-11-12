@@ -54,8 +54,9 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :img, category_ids: [],
-                                restaurant_attributes: [:id, :name, :url]).merge(user_id: current_user.id)
+    params.require(:post)
+          .permit(:title, :body, :img, category_ids: [], restaurant_attributes: [:id, :name, :url])
+          .merge(user_id: current_user.id)
   end
 
   def set_post
@@ -68,7 +69,7 @@ class PostsController < ApplicationController
 
   def query
     if params[:post].present? && params[:post][:keyword]
-      Post.joins(:restaurant).where('title LIKE ? OR body LIKE ? OR name LIKE ?',
+      Post.joins(:restaurant).where('title LIKE ? OR body L IKE ? OR name LIKE ?',
                                     "%#{params[:post][:keyword]}%",
                                     "%#{params[:post][:keyword]}%",
                                     "%#{params[:post][:keyword]}%")

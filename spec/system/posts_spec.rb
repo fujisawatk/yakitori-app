@@ -64,10 +64,7 @@ describe 'Posts', type: :system do
 
   describe '記事詳細表示機能' do
     before do
-      @post = FactoryBot.create(:post, title: "焼き鳥",
-        body: '美味しい！',
-        user: user_a
-      )
+      @post = FactoryBot.create(:post, title: "焼き鳥", body: '美味しい！', user: user_a)
     end
 
     context '記事を投稿したユーザー' do
@@ -115,10 +112,7 @@ describe 'Posts', type: :system do
 
   describe '記事編集・削除機能' do
     before do
-      @post = FactoryBot.create(:post, title: "未編集のタイトル",
-        body: '未編集の本文',
-        user: user_a
-      )
+      @post = FactoryBot.create(:post, title: "未編集のタイトル", body: '未編集の本文', user: user_a)
     end
 
     context '記事を投稿したユーザー' do
@@ -193,10 +187,7 @@ describe 'Posts', type: :system do
 
   describe '記事検索機能' do
     before do
-      @post = FactoryBot.create(:post, title: "焼き鳥",
-        body: '美味しい！',
-        user: user_a
-      )
+      @post = FactoryBot.create(:post, title: "焼き鳥", body: '美味しい！', user: user_a)
     end
 
     it '全てのユーザーが検索出来ること' do
