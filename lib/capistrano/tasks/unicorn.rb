@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # unicornのpidファイル、設定ファイルのディレクトリを指定
 namespace :unicorn do
   task :environment do

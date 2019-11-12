@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # テストのカバレッジを計測ツールsimplecovの設定
 require 'simplecov'
 SimpleCov.start 'rails' do
