@@ -30,7 +30,7 @@ describe User do
       end
     end
 
-    context 'メールで新規登録出来ないこと'do
+    context 'メールで新規登録出来ないこと' do
       it "nicknameが空では登録できないこと" do
         user = build(:user, nickname: "")
         user.valid?
