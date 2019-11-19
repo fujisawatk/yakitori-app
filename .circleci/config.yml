@@ -1,24 +1,22 @@
-version: 2 # use CircleCI 2.0
-jobs: # a collection of steps
-  rubocop:
-    docker: # run the steps with Docker
-      - image: circleci/ruby:2.5.1-node-browsers-legacy # ...with this image as the primary container; this is where all `steps` will run
-        environment: # environment variables for primary container
+version: 2.1                                            # CircleCI 2.0のバージョン指定
+
+executors:                                              # 再利用する実行環境の設定
+  default:
+    docker:                                             # 利用するDockerコンテナあるいはVMのイメージの指定(Docker推奨)
+      - image: circleci/ruby:2.5.1-node-browsers-legacy # ベースとなるDockerイメージ
+        environment:                                    # ベースコンテナの環境変数
           RAILS_ENV: test
           MYSQL_HOST: 127.0.0.1
           BUNDLER_VERSION: 2.0.1
-      - image: circleci/mysql:5.6.43 # database image
-        environment: # environment variables for database
+      - image: circleci/mysql:5.6.43                    # データベースイメージ
+        environment:                                    # データベースの環境変数
           MYSQL_DATABASE: yakitori-app_test
           MYSQL_USERNAME: 'root'
           MYSQL_PASSWORD: 'password'
-    steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+
+commands:                                               # 再利用するstep配下のコマンド設定
+  setup_bundler:
+    steps:
       - run:
           name: setup bundler
           command: |
@@ -27,62 +25,66 @@ jobs: # a collection of steps
             sudo rm /usr/local/bin/bundle
             sudo rm /usr/local/bin/bundler
             sudo gem install bundler
-      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
-      - run: yarn install
+  restore_gems:
+    steps:
+      - restore_cache:                                  # キャシュされた内容を取り出す命令
+          name: bundle installの結果を復元
+          keys:
+            - v1-deps-{{ checksum "Gemfile.lock" }}     # 最新のGemfile.lockに対応するキャッシュを取得する指定
+            - v1-deps-                                  # 完全に一致するキャッシュが見つからなかった場合、前方一致で検索した中で最新のキャッシュを利用
+  install_gems:
+    steps:
+      - run:
+          name: bundle installを実行
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+  save_gems:
+    steps:
       - save_cache:
+          name: bundle installの結果を保存
           paths:
             - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      # Rubocop
+          key: v1-deps-{{ checksum "Gemfile.lock" }}
+  setup_db:
+    steps:
       - run:
-          name: Rubocop
+          name: データベースのセットアップ
+          command: |
+            bundle exec rake db:create db:schema:load db:seed --trace
+
+jobs:                                                   # 実行するプログラムを定義
+  rubocop:                                              # job名
+    executor: default
+    working_directory: ~/repo                           # 実行ディレクトリの設定
+    steps:                                              # 実行コマンドを定義
+      - checkout                                        # Gitリポジトリを実行ディレクトリにコピー
+      - setup_bundler
+      - restore_gems
+      - install_gems
+      - save_gems
+      - run:
+          name: Rubocopを実行
           command: bundle exec rubocop
 
   rspec:
-    docker: # run the steps with Docker
-      - image: circleci/ruby:2.5.1-node-browsers-legacy # ...with this image as the primary container; this is where all `steps` will run
-        environment: # environment variables for primary container
-          RAILS_ENV: test
-          MYSQL_HOST: 127.0.0.1
-          BUNDLER_VERSION: 2.0.1
-      - image: circleci/mysql:5.6.43 # database image
-        environment: # environment variables for database
-          MYSQL_DATABASE: yakitori-app_test
-          MYSQL_USERNAME: 'root'
-          MYSQL_PASSWORD: 'password' 
+    executor: default
+    working_directory: ~/repo
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+      - setup_bundler
+      - restore_gems
+      - install_gems
+      - save_gems
+      - setup_db
       - run:
-          name: setup bundler
-          command: |
-            sudo gem update --system
-            sudo gem uninstall bundler
-            sudo rm /usr/local/bin/bundle
-            sudo rm /usr/local/bin/bundler
-            sudo gem install bundler
-      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
-      - run: yarn install
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
-      # Rspec
-      - run:
-          name: Rspec
+          name: Rspecを実行
           command: bundle exec rspec
 
-workflows:
-  version: 2
+workflows:                                              # jobの実行制御を定義
+  version: 2.1
   rubocop_rspec:
     jobs:
       - rubocop
-      - rspec:
+      - rspec:                                          # jobの起動順番を設定（rubocop完了後にrspecを起動）
           requires:
             - rubocop
