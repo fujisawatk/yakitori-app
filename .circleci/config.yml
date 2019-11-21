@@ -7,18 +7,19 @@ executors:                                              # 再利用する実行�
         environment:                                    # ベースコンテナの環境変数
           RAILS_ENV: test
           MYSQL_HOST: 127.0.0.1
+          MYSQL_USERNAME: 'root'
+          MYSQL_PASSWORD: ''
+          MYSQL_PORT: 3306
           BUNDLER_VERSION: 2.0.1
       - image: circleci/mysql:5.6.43                    # データベースイメージ
         environment:                                    # データベースの環境変数
           MYSQL_DATABASE: yakitori-app_test
-          MYSQL_USERNAME: 'root'
-          MYSQL_PASSWORD: 'password'
 
 commands:                                               # 再利用するstep配下のコマンド設定
   setup_bundler:
     steps:
       - run:
-          name: setup bundler
+          name: bundlerのセットアップ
           command: |
             sudo gem update --system
             sudo gem uninstall bundler
@@ -45,6 +46,10 @@ commands:                                               # 再利用するstep配
           paths:
             - ./vendor/bundle
           key: v1-deps-{{ checksum "Gemfile.lock" }}
+  build_db:
+    steps:
+      - run: rm ./config/database.yml
+      - run: mv ./config/database.yml.ci ./config/database.yml
   setup_db:
     steps:
       - run:
@@ -72,6 +77,7 @@ jobs:                                                   # 実行するプログ�
     steps:
       - checkout
       - setup_bundler
+      - build_db
       - restore_gems
       - install_gems
       - save_gems
