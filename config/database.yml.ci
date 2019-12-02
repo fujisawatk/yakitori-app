@@ -1,0 +1,9 @@
+test:
+  host: 127.0.0.1
+  adapter: mysql2
+  encoding: utf8
+  port: 3306
+  pool: 5
+  database: ci_test
+  username: root
+  password:

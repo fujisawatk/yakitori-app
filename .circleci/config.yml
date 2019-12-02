@@ -1,0 +1,96 @@
+version: 2.1                                            # CircleCI 2.0のバージョン指定
+
+executors:                                              # 再利用する実行環境の設定
+  default:
+    docker:                                             # 利用するDockerコンテナあるいはVMのイメージの指定(Docker推奨)
+      - image: circleci/ruby:2.5.1-node-browsers-legacy # ベースとなるDockerイメージ
+        environment:                                    # ベースコンテナの環境変数
+          RAILS_ENV: test
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_USERNAME: 'root'
+          MYSQL_PASSWORD: ''
+          MYSQL_PORT: 3306
+          BUNDLER_VERSION: 2.0.1
+      - image: circleci/mysql:5.6.43                    # データベースイメージ
+        environment:                                    # データベースの環境変数
+          MYSQL_DATABASE: yakitori-app_test
+
+commands:                                               # 再利用するstep配下のコマンド設定
+  setup_bundler:
+    steps:
+      - run:
+          name: bundlerのセットアップ
+          command: |
+            sudo gem update --system
+            sudo gem uninstall bundler
+            sudo rm /usr/local/bin/bundle
+            sudo rm /usr/local/bin/bundler
+            sudo gem install bundler
+  restore_gems:
+    steps:
+      - restore_cache:                                  # キャシュされた内容を取り出す命令
+          name: bundle installの結果を復元
+          keys:
+            - v1-deps-{{ checksum "Gemfile.lock" }}     # 最新のGemfile.lockに対応するキャッシュを取得する指定
+            - v1-deps-                                  # 完全に一致するキャッシュが見つからなかった場合、前方一致で検索した中で最新のキャッシュを利用
+  install_gems:
+    steps:
+      - run:
+          name: bundle installを実行
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+  save_gems:
+    steps:
+      - save_cache:
+          name: bundle installの結果を保存
+          paths:
+            - ./vendor/bundle
+          key: v1-deps-{{ checksum "Gemfile.lock" }}
+  build_db:
+    steps:
+      - run: rm ./config/database.yml
+      - run: mv ./config/database.yml.ci ./config/database.yml
+  setup_db:
+    steps:
+      - run:
+          name: データベースのセットアップ
+          command: |
+            bundle exec rake db:create db:schema:load db:seed --trace
+
+jobs:                                                   # 実行するプログラムを定義
+  rubocop:                                              # job名
+    executor: default
+    working_directory: ~/repo                           # 実行ディレクトリの設定
+    steps:                                              # 実行コマンドを定義
+      - checkout                                        # Gitリポジトリを実行ディレクトリにコピー
+      - setup_bundler
+      - restore_gems
+      - install_gems
+      - save_gems
+      - run:
+          name: Rubocopを実行
+          command: bundle exec rubocop
+
+  rspec:
+    executor: default
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - setup_bundler
+      - build_db
+      - restore_gems
+      - install_gems
+      - save_gems
+      - setup_db
+      - run:
+          name: Rspecを実行
+          command: bundle exec rspec
+
+workflows:                                              # jobの実行制御を定義
+  version: 2.1
+  rubocop_rspec:
+    jobs:
+      - rubocop
+      - rspec:                                          # jobの起動順番を設定（rubocop完了後にrspecを起動）
+          requires:
+            - rubocop
