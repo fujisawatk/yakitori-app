@@ -4,8 +4,6 @@ test:
   encoding: utf8
   port: 3306
   pool: 5
-  timeout: 10000
-  socket: /var/lib/mysql/mysql.sock
-  database: yakitori-app_test
+  database: ci_test
   username: root
-  password: ''
+  password:
